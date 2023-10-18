@@ -1,26 +1,39 @@
-html, body {
-    margin: 0;
-    font-family: Helvetica, sans-serif;
-}
-
-nav {
-    border: 2px solid red;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
+:root {
+    --header-color: rgba(28,108,97,1);
+    --dark-grey: rgba(50,50,50,1);
+    --header-vertical-pad: 20px;
+    --header-horizontal-pad: 10px;
 }
 
 * {
     box-sizing: border-box;
 }
 
-#always-visible-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 3px solid pink;
+html, body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding-top: var(--header-vertical-pad);
+    padding-bottom: var(--header-vertical-pad);
+    padding-left: var(--header-horizontal-pad);
+    padding-right: var(--header-horizontal-pad);
+}
+
+nav label span { /*burger lines*/
+    height: 5px; /*"burger-height"*/
+    width: 37px;
+    background-color: white; /*"burger-color"*/
+    border-radius: 2px; /*slightly rounded corners*/
 }
 
 /*
@@ -37,9 +50,8 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_commo
 }
 
 .main-header {
-    border: 2px solid yellow;
     grid-area: header;
-    background-color: teal;
+    background-color: var(--header-color);
 }
 
 .main-content {
@@ -52,23 +64,29 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_commo
     background-color: orange;
 }
 
+#first-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: var(--header-horizontal-pad);
+}
+
+.nav-item {
+    display: none;
+    background-color: var(--dark-grey);
+}
+
 /*The box containing the burger menu*/
 .menu-button-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 27px;
-    width: 37px;
+    justify-content: space-between;
+
 }
 
 .menu-button-container:hover {
     cursor: pointer;
-}
-
-.menu-button-line {
-    height: 5px; /*"burger-height"*/
-    background-color: white; /*"burger-color"*/
-    border-radius: 2px; /*slightly rounded corners*/
 }
 
 #mb-line1 {
@@ -83,41 +101,31 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_commo
     transition-duration: 0.1s;
 }
 
-.menu {
-    display: none;
-    padding-left: 0;
-    margin: 0;
-    list-style-type: none;
-}
-
-.menu-item {
-   padding: 10px;
-   border: 2px solid black;
-}
-
 #menu-toggle {
     display: none; /*make invisible*/
 }
 
-#menu-toggle:checked ~ .test #mb-line1 {
+#menu-toggle:checked ~ ul .nav-item {
+    display: flex; /*become visible*/
+    flex-direction: column;
+    justify-content: center;
+}
+#menu-toggle:checked ~ ul .nav-item a:hover {
+    background-color: green;
+}
+
+#menu-toggle:checked ~ ul #mb-line1 {
     /*drop to mid-box and rotate, note that current impl only works (well)
     for current burger-size*/
     transform: translateY(11px) rotate(45deg);
 }
 
-#menu-toggle:checked ~ .test #mb-line2 {
+#menu-toggle:checked ~ ul #mb-line2 {
     transform: rotate(-45deg);
 }
 
-#menu-toggle:checked ~ .test #mb-line3 {
+#menu-toggle:checked ~ ul #mb-line3 {
     transform: scaleY(0); /*disappear*/
-}
-
-@media (max-width: 499px) {
-    #menu-toggle:checked ~ .menu {
-        display: block;
-        background-color: rgba(50,50,50,1);
-    }
 }
 
 @media (min-width: 500px) {
@@ -128,18 +136,23 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_commo
             "content content"
             "footer footer";
     }
-    nav, .menu {
+    nav ul {
         display: flex;
-        align-items: center;
     }
-    .menu {
-        background-color: teal;
+    .nav-item {
+        display: flex; /*become visible*/
+        align-items: center;
+        background-color: var(--header-color);
     }
     .menu-button-container {
         display: none;
     }
 }
 
+/*
+18/10-23: Not needed yet, but will soon be as we make more use of the
+grid template areas
+*/
 @media (min-width: 700px) {
     .grid-container {
         grid-template-columns: 1fr 4fr 1fr;
