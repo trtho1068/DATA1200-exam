@@ -1,88 +1,131 @@
 :root {
-    --header-color: rgba(28,108,97,1);
-    --dark-grey: rgba(50,50,50,1);
-    --header-vertical-pad: 20px;
-    --header-horizontal-pad: 10px;
+    --dark-theme-color: rgba(189, 147,249,1);
+    --dark-theme-bg: rgba(25,25,25,1);
+    --dark-theme-text: rgba(255,255,255,0.87);
+    --dark-theme-text2: rgba(255,255,255,0.6);
+
+    --light-theme-color: rgba(211,74,151,1);
+    --light-theme-bg: rgba(247,247,247,1);
+    --light-theme-text: rgba(34,36,48,1);
+    --light-theme-text2: rgba(0,0,0,0.87);
+
+    --white-overlay5: rgba(255,255,255,0.05);
+    --color: var(--dark-theme-color);
+    --bg-color: var(--dark-theme-bg);
+    --text-color: var(--dark-theme-text);
+    --lesser-text-color: var(--dark-theme-text2);
 }
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
+body {
     margin: 0;
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-nav ul {
+h1, h2, h3 {
+    margin-bottom: 0.25em;
+}
+
+/*
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_common_layouts_using_grids
+The following classes named main-<xxx> are to be used as the main containers
+on all all pages except <whichever page will have different design>
+*/
+.main-grid-container {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "content"
+        "sidebar"
+        "footer";
+    font-size: 1.2em;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.5em;
+}
+
+.main-header {
+    grid-area: header;
+}
+
+.main-content {
+    grid-area: content;
+    font-size: 1em;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.main-sidebar {
+    grid-area: sidebar;
+    background-color: var(--white-overlay5);
+    padding: 10px;
+}
+
+.main-footer {
+    grid-area: footer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.main-nav ul, .main-footer ul {
     list-style-type: none;
     margin: 0;
     padding-left: 0;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    padding-top: var(--header-vertical-pad);
-    padding-bottom: var(--header-vertical-pad);
-    padding-left: var(--header-horizontal-pad);
-    padding-right: var(--header-horizontal-pad);
-}
-
-nav label span { /*burger lines*/
-    height: 5px; /*"burger-height"*/
-    width: 37px;
-    background-color: white; /*"burger-color"*/
-    border-radius: 2px; /*slightly rounded corners*/
-}
-
-/*
-Primary source for the grid layout:
-https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_common_layouts_using_grids
-*/
-.grid-container {
-    display: grid;
-    gap: 20px;
-    grid-template-areas:
-        "header"
-        "content"
-        "footer";
-}
-
-.main-header {
-    grid-area: header;
-    background-color: var(--header-color);
-}
-
-.main-content {
-    grid-area: content;
-    background-color: lightgrey;
-}
-
-.main-footer {
-    grid-area: footer;
-    background-color: orange;
-}
-
-#first-nav-item {
+/*nav ul display flex for simple switching between vert & horz nav*/
+.main-nav ul {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: var(--header-horizontal-pad);
+    flex-direction: column;
 }
 
-.nav-item {
+/*"Home" always visible...*/
+.main-nav ul li:first-child {
+    display: flex;
+}
+
+/*...other nav links are not, make parent li invisible*/
+.main-nav ul li:not(:first-child){
     display: none;
-    background-color: var(--dark-grey);
+    background-color: var(--white-overlay5);
+}
+
+.main-nav a {
+    color: inherit;
+    text-decoration: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-grow: 1;
+}
+
+/*burger lines*/
+.main-nav label span {
+    height: 2px; /*"burger-height"*/
+    width: 30px;
+    background-color: var(--text-color); /*"burger-color"*/
+    border-radius: 2px; /*slightly rounded corners*/
 }
 
 /*The box containing the burger menu*/
 .menu-button-container {
+    position: absolute;
+    top: 9px;
+    right: 0;
     display: flex;
     flex-direction: column;
-    height: 27px;
     justify-content: space-between;
-
+    height: 30px;
+    z-index: 1;
+    padding: 5px;
+    margin: 7px;
 }
 
 .menu-button-container:hover {
@@ -101,64 +144,84 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_commo
     transition-duration: 0.1s;
 }
 
+/*The invisible checkbox associated with the burger*/
 #menu-toggle {
-    display: none; /*make invisible*/
+    opacity: 0; /*make invisible, display: none would break keyboard nav*/
+    position: absolute; /*do not push other content down*/
+    top: 22px;
+    right: 14px;
 }
 
-#menu-toggle:checked ~ ul .nav-item {
-    display: flex; /*become visible*/
-    flex-direction: column;
-    justify-content: center;
-}
-#menu-toggle:checked ~ ul .nav-item a:hover {
-    background-color: green;
+#menu-toggle:focus ~ .menu-button-container {
+    outline: 1px solid var(--lesser-text-color);
 }
 
-#menu-toggle:checked ~ ul #mb-line1 {
+/*Make the invisible visible*/
+#menu-toggle:checked ~ ul li:not(:first-child) {
+    display: flex;
+}
+
+/*Make the burger become an X...*/
+#menu-toggle:checked ~ .menu-button-container #mb-line1 {
     /*drop to mid-box and rotate, note that current impl only works (well)
     for current burger-size*/
-    transform: translateY(11px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg);
 }
 
-#menu-toggle:checked ~ ul #mb-line2 {
+#menu-toggle:checked ~ .menu-button-container #mb-line2 {
     transform: rotate(-45deg);
 }
 
-#menu-toggle:checked ~ ul #mb-line3 {
+#menu-toggle:checked ~ .menu-button-container #mb-line3 {
     transform: scaleY(0); /*disappear*/
 }
 
+/*And then we move to larger screens...*/
 @media (min-width: 500px) {
-    .grid-container {
+    .main-grid-container {
         grid-template-columns: 1fr 3fr;
         grid-template-areas:
             "header header"
-            "content content"
+            "sidebar content"
             "footer footer";
+            padding-left: 5vw;
+            padding-right: 5vw;
     }
-    nav ul {
+    .main-nav ul {
+        flex-direction: row;
+    }
+    .main-nav ul li:not(:first-child) {
         display: flex;
-    }
-    .nav-item {
-        display: flex; /*become visible*/
-        align-items: center;
-        background-color: var(--header-color);
+        background-color: inherit;
     }
     .menu-button-container {
-        display: none;
+        display: none; /*invisible burger*/
+    }
+    #menu-toggle {
+        display: none; /*rm burger fm keyboard nav*/
+    }
+}
+
+@media (min-width: 700px) {
+    .main-grid-container {
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-areas:
+            "header header header"
+            "sidebar content content"
+            "footer footer footer";
     }
 }
 
 /*
-18/10-23: Not needed yet, but will soon be as we make more use of the
-grid template areas
+I wanted to also implement a toggle to override the blw setting, but
+a fully functional solution for multiple pages would seem to require some
+scripting. We stick with no JS for the exam and move on...
 */
-@media (min-width: 700px) {
-    .grid-container {
-        grid-template-columns: 1fr 4fr 1fr;
-        grid-template-areas:
-            "header header header"
-            "content content content"
-            "footer footer footer"
+@media (prefers-color-scheme: light) {
+    :root {
+        --color: var(--light-theme-color);
+        --bg-color: var(--light-theme-bg);
+        --text-color: var(--light-theme-text);
+        --lesser-text-color: var(--light-theme-text2);
     }
 }
