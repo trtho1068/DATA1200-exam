@@ -46,6 +46,7 @@ figcaption {
 }
 
 img {
+    height: auto;
     width: 100%;
     border-radius: 2px;
     filter: grayscale(38%);
@@ -235,7 +236,7 @@ img {
 }
 
 /*And then we move to larger screens...*/
-@media (min-width: 800px) {
+@media (min-width: 700px) {
     .main-grid-container {
         grid-template-columns: 3fr 1fr;
         grid-template-rows: auto 1fr auto;
@@ -243,6 +244,9 @@ img {
             "header header"
             "content sidebar"
             "footer footer";
+    }
+    .main-content {
+        overflow-y: scroll;
     }
     /*horizonal navigation*/
     .main-nav ul {
@@ -268,8 +272,11 @@ img {
 }
 
 @media (min-width: 1200px) {
+    img.lighthouse-screenshot {
+        width: 75%;
+    }
     .main-grid-container {
-        grid-template-columns: 2fr 6fr 2fr 2fr;
+        grid-template-columns: 2fr 7fr 2fr 1fr;
         grid-template-areas:
             "header header header header"
             ". content sidebar ."

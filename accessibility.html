@@ -32,21 +32,80 @@
       </nav>
     </header>
     <main class="main-content">
-      <h1>Heading One</h1>
+      <h1>Accessibility</h1>
       <p>
-      Content
+        Here we go through how we used automated tests to try and improve our
+        site, primarily by making it more accessible. We've used
+        <a href="https://developer.chrome.com/docs/lighthouse/overview/"
+           title="Go to Google Lighthouse documentation">
+          Google Lighthouse</a>.
       </p>
-      <h2>Heading Two</h2>
+      <h2>First round</h2>
       <p>
-      Content
+        The test was run on November 6th 2023 against
+        <a href="https://github.com/trtho1068/DATA1200-exam/tree/3d7dfdce93048a225217ddd9cb7c3eeb37ceb6c8"
+          target="_blank"> this commit</a>.
       </p>
-      <h2>Heading Two</h2>
+      <figure>
+        <img src="img/accessibility01.png"
+             alt="screenshot of Lighthouse scores"
+             class="lighthouse-screenshot"
+             width="480" height="107">
+        <figcaption>
+          Lighthouse scores from the first automated test.
+        </figcaption>
+      </figure>
       <p>
-        Content
+        Our overall accessibility score is 94, not so bad, but there is room
+        for improvement. There is also an accessibility related issue in the
+        SEO section, we will come back to that.
+      </p>
+      <h3>Performance</h3>
+      <p>
+        A few other issues are grouped under performance and relates
+        primarily to images, which at this stage there was only one of.
+      </p>
+      <figure>
+        <img src="img/accessibility01-pref-diagnostics.png"
+             alt="screenshot of Lighthouse performance diagnostics overview"
+             class="lighthouse-screenshot"
+             width="541" height="218">
+        <figcaption>
+          Performance diagnostics from the first automated test.
+        </figcaption>
+      </figure>
+      <p>
+        Setting an explicit width and height is fairly straightforward,
+        when using the <code>&ltimg&gt</code> tag Intellij will even suggest
+        the appropriate values.
+      </p>
+      <p>
+        Properly sizing images is trickier. The consequence of too large
+        images is wasted bytes and slower page load. To at least improve on what
+        was, we replace the image on the home page, with two cropped versions.
+        One for viewports &gt 1200px and one for viewports &lt 1200px.
+      </p>
+      <p>
+        To serve images in next-gen formats we convert them to webp. We provide
+        jpg fallbacks for browsers not supporting webp.
+      </p>
+      <p>
+        Caching resources is not part of DATA1200, so this suggestion we
+        ignore.
+      </p>
+      <h2>Second Round</h2>
+      <p>
+        content
       </p>
     </main>
     <aside class="main-sidebar">
-      Sidebar
+      <p>
+        If you're interested, you can read about how to make the most
+        <a href="https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/"
+           target="_blank">
+          inaccessible website possible</a> while still maintaining a perfect
+        Lighthouse score.
+      </p>
     </aside>
     <footer class="main-footer">
       <!--
