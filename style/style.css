@@ -3,80 +3,136 @@
     --dark-theme-bg: rgba(25,25,25,1);
     --dark-theme-text: rgba(255,255,255,0.87);
     --dark-theme-text2: rgba(255,255,255,0.6);
+    --dark-theme-overlay5: rgba(255,255,255,0.05);
 
     --light-theme-color: rgba(211,74,151,1);
     --light-theme-bg: rgba(247,247,247,1);
     --light-theme-text: rgba(34,36,48,1);
-    --light-theme-text2: rgba(0,0,0,0.87);
+    --light-theme-text2: rgba(34,36,48,0.87);
+    --light-theme-overlay5: rgba(34,36,48,0.07);
 
-    --white-overlay5: rgba(255,255,255,0.05);
     --color: var(--dark-theme-color);
     --bg-color: var(--dark-theme-bg);
     --text-color: var(--dark-theme-text);
     --lesser-text-color: var(--dark-theme-text2);
+    --overlay5: var(--dark-theme-overlay5);
+
+    --padding: 1em;
 }
+
+/*
+This document is written mobile first, and dark theme first. All media queries
+are gathered at the end.
+*/
 
 * {
     box-sizing: border-box;
 }
 
-body {
+html, body, figure {
     margin: 0;
+}
+
+html, body {
     font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.33;
+    height: 100%;
 }
 
-h1, h2, h3 {
-    margin-bottom: 0.25em;
+figcaption {
+    color: var(--lesser-text-color);
+    font-size: 0.75em;
 }
 
-/*
-https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Realizing_common_layouts_using_grids
-The following classes named main-<xxx> are to be used as the main containers
-on all all pages except <whichever page will have different design>
-*/
+img {
+    width: 100%;
+    border-radius: 2px;
+    filter: grayscale(38%);
+}
+
 .main-grid-container {
     display: grid;
+    grid-template-rows: auto 1fr auto auto;
     grid-template-areas:
         "header"
         "content"
         "sidebar"
         "footer";
-    font-size: 1.2em;
+    grid-row-gap: var(--padding);
     color: var(--text-color);
     background-color: var(--bg-color);
-    line-height: 1.5em;
 }
 
 .main-header {
     grid-area: header;
+    background-color: var(--overlay5);
 }
 
 .main-content {
     grid-area: content;
-    font-size: 1em;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    padding-bottom: var(--padding);
 }
 
 .main-sidebar {
     grid-area: sidebar;
-    background-color: var(--white-overlay5);
-    padding: 10px;
+    height: min-content;
+    align-self: center;
+    font-size: 0.75em;
+    line-height: 1.5;
+    color: var(--lesser-text-color);
+    background-color: var(--overlay5);
+    border-radius: 9px;
+    padding: var(--padding);
+}
+
+.main-content a, .main-sidebar a {
+    color: var(--text-color);
+}
+
+.main-content a:hover, .main-sidebar a:hover {
+    color: var(--color);
 }
 
 .main-footer {
     grid-area: footer;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    font-size: 0.75em;
+    line-height: 1.5;
+    color: var(--lesser-text-color);
+    background-color: var(--overlay5);
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
 }
 
-.main-nav ul, .main-footer ul {
+.main-footer address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 9px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+.main-footer a {
+    color: inherit;
+    text-decoration: none;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+}
+
+.main-nav {
+    grid-area: nav;
+}
+
+.main-nav ul {
     list-style-type: none;
     margin: 0;
-    padding-left: 0;
+    padding: 0;
 }
 
 /*nav ul display flex for simple switching between vert & horz nav*/
@@ -91,20 +147,22 @@ on all all pages except <whichever page will have different design>
 }
 
 /*...other nav links are not, make parent li invisible*/
-.main-nav ul li:not(:first-child){
+.main-nav li:not(:first-child){
     display: none;
-    background-color: var(--white-overlay5);
+    background-color: var(--dark-theme-overlay5);
 }
 
 .main-nav a {
     color: inherit;
     text-decoration: none;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: var(--padding);
     flex-grow: 1;
 }
+
+.main-nav li:not(:first-child) a:hover {
+    background-color: var(--dark-theme-overlay5);
+}
+
 
 /*burger lines*/
 .main-nav label span {
@@ -153,7 +211,7 @@ on all all pages except <whichever page will have different design>
 }
 
 #menu-toggle:focus ~ .menu-button-container {
-    outline: 1px solid var(--lesser-text-color);
+    outline: 1px solid var(--dark-theme-text2);
 }
 
 /*Make the invisible visible*/
@@ -177,45 +235,62 @@ on all all pages except <whichever page will have different design>
 }
 
 /*And then we move to larger screens...*/
-@media (min-width: 500px) {
+@media (min-width: 800px) {
     .main-grid-container {
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: auto 1fr auto;
         grid-template-areas:
             "header header"
-            "sidebar content"
+            "content sidebar"
             "footer footer";
-            padding-left: 5vw;
-            padding-right: 5vw;
     }
+    /*horizonal navigation*/
     .main-nav ul {
         flex-direction: row;
     }
-    .main-nav ul li:not(:first-child) {
+    /*visible links, must now inherit bg color to avoid looking stupid*/
+    .main-nav li:not(:first-child) {
         display: flex;
         background-color: inherit;
     }
-    .menu-button-container {
-        display: none; /*invisible burger*/
+    /*active page visual cue*/
+    .main-nav li:not(:first-child) a.active {
+        background-color: var(--dark-theme-overlay5);
     }
+    /*invisible burger*/
+    .menu-button-container {
+        display: none;
+    }
+    /*rm burger fm keyboard nav*/
     #menu-toggle {
-        display: none; /*rm burger fm keyboard nav*/
+        display: none;
     }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 1200px) {
     .main-grid-container {
-        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-columns: 2fr 6fr 2fr 2fr;
         grid-template-areas:
-            "header header header"
-            "sidebar content content"
-            "footer footer footer";
+            "header header header header"
+            ". content sidebar ."
+            "footer footer footer footer";
+    }
+    /*
+    Want the header bg to fill the width of the screen, but the header
+    content (nav-links) to align with other content. This is one way...
+    better solutions may well exist
+    */
+    .main-header {
+        display: grid;
+        grid-template-columns: 2fr 10fr;
+        grid-template-areas:
+            ". nav";
     }
 }
 
 /*
-I wanted to also implement a toggle to override the blw setting, but
-a fully functional solution for multiple pages would seem to require some
-scripting. We stick with no JS for the exam and move on...
+If your system (or browser, at least firefox) settings prefer light theme,
+then light theme you shall get...
 */
 @media (prefers-color-scheme: light) {
     :root {
@@ -223,5 +298,28 @@ scripting. We stick with no JS for the exam and move on...
         --bg-color: var(--light-theme-bg);
         --text-color: var(--light-theme-text);
         --lesser-text-color: var(--light-theme-text2);
+        --overlay5: var(--light-theme-overlay5);
+    }
+    img {
+        filter: none;
+    }
+    /*...but, I still want a dark header*/
+    .main-header {
+        color: var(--dark-theme-text);
+        background-color: var(--light-theme-text);
+    }
+    /*must keep the burger lines light colored in a dark header*/
+    .main-nav label span {
+        background-color: var(--dark-theme-text);
+    }
+    /*use shadow to elevate sidebar in light theme*/
+    .main-sidebar {
+        background-color: var(--light-theme-bg);
+        /*
+        shadow fm here: https://getcssscan.com/css-box-shadow-examples
+        multiple shadow effects separated by comma
+        */
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+                    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
 }
