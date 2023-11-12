@@ -74,6 +74,7 @@ img {
     padding-left: var(--padding);
     padding-right: var(--padding);
     padding-bottom: var(--padding);
+    display: grid;
 }
 
 .main-sidebar {
@@ -329,5 +330,8 @@ then light theme you shall get...
         border: 2px solid orange;
         min-width: 200px;
         max-width: 400px;
+    }
+    .artikel-wrapper {
+        border: 2px solid
     }
 }
