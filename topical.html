@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <style>
+        :root {
+            --dark-theme-color: rgba(189, 147,249,1);
+            --dark-theme-bg: rgba(25,25,25,1);
+            --dark-theme-text: rgba(255,255,255,0.87);
+            --dark-theme-text2: rgba(255,255,255,0.6);
+            --dark-theme-overlay5: rgba(255,255,255,0.05);
+
+            --light-theme-color: rgba(211,74,151,1);
+            --light-theme-bg: rgba(247,247,247,1);
+            --light-theme-text: rgba(34,36,48,1);
+            --light-theme-text2: rgba(34,36,48,0.87);
+            --light-theme-overlay5: rgba(34,36,48,0.07);
+
+            --color: var(--dark-theme-color);
+            --bg-color: var(--dark-theme-bg);
+            --text-color: var(--dark-theme-text);
+            --lesser-text-color: var(--dark-theme-text2);
+            --overlay5: var(--dark-theme-overlay5);
+
+            --padding: 1em;
+        }
+        .background-colour{
+            background-color: brown;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: darkgoldenrod;
+        }
+
+        .container:hover .overlay {
+            opacity: 1;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: relative;
+            top: 40%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .bg-image{
+            background-image:url("img/løve.jpg");
+            border: 10px solid goldenrod;
+            filter: blur(6px);
+            height: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .bg-text {
+            background-color: blue;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            font-weight: bold;
+            border: 3px solid black;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 50%;
+            padding: 20px;
+            text-align: center;
+            font-size: 32px;
+        }
+        .main-footer {
+            grid-area: footer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75em;
+            line-height: 1.5;
+            color: var(--lesser-text-color);
+            background-color: var(--overlay5);
+            padding-top: var(--padding);
+            padding-bottom: var(--padding);
+        }
+        .main-footer address {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 9px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+        }
+
+        .main-footer a {
+            color: inherit;
+            text-decoration: none;
+            padding-left: var(--padding);
+            padding-right: var(--padding);
+        }
+        .text-bloc{
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: black;
+            color: goldenrod;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .topnav-centered a {
+            float: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+</head>
+<header class="main-header">
+    <nav class="main-nav">
+        <input id="menu-toggle" type="checkbox" role="button">
+        <ul>
+            <li>
+                <a class="active" href="index.html">Home</a>
+            </li>
+            <li>
+                <a href="somewhere-on-campus.html">Blah</a>
+            </li>
+            <li>
+                <a href="topical.html">Topical</a>
+            </li>
+            <li>
+                <a href="accessibility.html">Accessibility</a>
+            </li>
+        </ul>
+        <label class="menu-button-container" for="menu-toggle">
+            <span id=mb-line1></span>
+            <span id=mb-line2></span>
+            <span id=mb-line3></span>
+        </label>
+    </nav>
+</header>
+</nav>
+<body style="padding-left: 20%; padding-right: 20%; color: var(--text-color);
+    background-color: var(--bg-color);">
+<!--class="background-colour"-->
+<!-- Header -->
+<figure class="bg-image"></figure>
+
+<figure  class="bg-text" style="text-align: center" >
+    <h1>Mammals</h1>
+</figure>
+<p style="padding: 20px; border: 3px solid goldenrod"></p>
+<section style="column-count: 2">
+    <article class="container">
+            <p>Mammals are a class of vertibrates, and are identified by multiple aspects:</p>
+            <ul>
+                <li>Mammals are warmblooded animals</li>
+                <li>Most mammals have hair</li>
+                <li>Mammals give their kids milk</li>
+                <li>Most mammals give live birth, but theire are exemptions, for example the platapus</li>
+            </ul>
+            <p>Today there is more than 5400 species of mammals,
+            including a great variaty of animals from bats to whales.
+            The pictures below contains information about 5 subgroups of mammals</p>
+    </article>
+    <aside class="container">
+        <img src="/img/Chimp.jpg" style="width: 100%">
+        <div class="text-bloc" style="text-align: right">
+            <p>chimp</p>
+        </div>
+    </aside>
+</section>
+<h4 style="text-align: center; padding:10px; border: 3px solid goldenrod">Hower over the pictures below to see more information</h4>
+    <section style="column-count: 2; display: flex">
+        <figure class="container">
+            <img src="/img/elefant.jpg" style="width:100%; height: 100%;">
+            <div class="overlay">
+                <article class="text">
+                    <h2>Elephants</h2>
+                    <p>Elephants are the largest terestrial animals in the world today.
+                    The can grow to the impressive stature of a three meter shoulder height, and can weigh as much as 5 tons</p>
+                    <a href="https://www.youtube.com/watch?v=Aw6GkiCvcWs">Video about elephants</a>
+                    <a href="https://snl.no/elefanter">For more information about elephants</a>
+                </article>
+            </div>
+        </figure>
+        <figure class="container">
+            <img src="/img/Bat.jpg" style="width:100%; height: 100%;";>
+            <div class="overlay">
+                <article class="text">
+                    <h2>Bats</h2>
+                    <p>Bats are the second most diverse group of mammals after rhodents. Today there exists more than 1400 species of bats, meaning that more than 20% of all
+                    mammals are baths.
+                    Different species of baths grow from the size of a couple of grams to large flying foxes with an almost two meter wingspan</p>
+                    <a href="https://snl.no/flaggermus">For more information about bats</a>
+                </article>
+            </div>
+        </figure>
+    </section>
+    <section style="column-count: 2; display: flex">
+        <figure class="container">
+            <img src="/img/Moskus.jpg" style="width:100%; height: 100%";>
+            <div class="overlay">
+                <article class="text">
+                    <h2>muskox</h2>
+                    <p>Muskox are ungulates that are more closely related to goats and sheep, than cows.
+                    These animals live in arctic envirorments in the northern hemisphere.
+                    </p>
+                    <a href="https://www.youtube.com/watch?v=PkWVGf2sfiw">Click on this link to watch muskoxes in the wild.</a>
+
+                </article>
+            </div>
+        </figure>
+
+        <figure class="container">
+            <img src="/img/RødPanda.jpg" style="width:100%; height: 100%";>
+            <div class="overlay">
+                <article class="text">
+                    <h2>Red panda</h2>
+                    <p>Red pandas belong to the family carnivora, the same group that includes animals like lions and bears.
+                    Red pandas mostly live of eating bamboo, and they can grow to a size of 6,2 kg and roughly a meter long.</p>
+                    <a href="https://www.youtube.com/watch?v=NB5-84rBp9M">To learn more about the red panda click on this link.</a>
+                </article>
+            </div>
+        </figure>
+
+    </section>
+    <section style="column-count: 1">
+        <figure class="container">
+            <img src="/img/Spermhval.jpg" style="width:100%; height: 100%";>
+            <div class="overlay">
+                <article class="text">
+                    <h2>Whales</h2>
+                    <p>Whales or Cetacea are a group of marine mammals that contains animals in a size range from the
+                       larget animal on earth, with a size upwards to 30 meters, down to smal dolphines that are no
+                       longer than a meter. Whales are actually ungultes, meaning that they are most closely related to
+                       animals like the moose.
+                    </p>
+                    <a href="https://www.youtube.com/watch?v=WabT1L-nN-E">Whales are vocal animals, click on this link to listen to whale song</a>
+
+                </article>
+            </div>
+
+        </figure>
+    </section>
+
+<h3 style="text-align:center; padding: 10px; border: 3px solid goldenrod">You may also be interested in</h3>
+<nav class="main-nav">
+    <input id="menu-toggle" type="checkbox" role="button">
+    <ul>
+        <li>
+            <a href="topical.html"><img src="/img/Løve.jpg"style="width: 100px; height: 100px; " title="current page"></a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Evolution_of_mammals"><img src="/img/Dimetrodon.jpg" style="width: 100px; height: 100px; " title="Evolution of mammals"></a>
+        </li>
+
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Bird"><img src="/img/Ørn.jpg" style="width: 100px; height: 100px; " title="Birds"></a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Reptile"><img src="/img/Skilpadde.jpg" style="width: 100px; height: 100px; " title="Reptiles"></a>
+        </li>
+    </ul>
+    <label class="menu-button-container" for="menu-toggle">
+        <span id=mb-line1></span>
+        <span id=mb-line2></span>
+        <span id=mb-line3></span>
+    </label>
+</nav>
+
+<section style="column-count: 1;">
+    <article class="container">
+        <h2 style="text-align: center; padding: 10px; border: 3px solid goldenrod">References</h2>
+        <ol>
+            <li>https://snl.no/pattedyr</li>
+            <li>https://snl.no/elefanter</li>
+            <li>https://snl.no/flaggermus</li>
+            <li>https://snl.no/moskus</li>
+            <li>https://snl.no/r%C3%B8dpanda</li>
+            <li>https://snl.no/hvaler</li>
+        </ol>
+
+        <h2 STYLE="text-align: center;padding: 10px; border: 3px solid goldenrod">Sources to pictures</h2>
+        <ol>
+            <li>https://media.snl.no/media/150981/standard_Lion_d_Afrique.jpg</li>
+            <li>https://media.snl.no/media/168356/standard_compressed_shutterstock_1691405560.jpg</li>
+            <li>https://live.staticflickr.com/5769/23151727161_9438a90592_k.jpg</li>
+            <li>https://image.forskning.no/123028.jpg?imageId=123028&x=0&y=0&panox=0&panoy=0&panow=0&panoh=0&width=1200&height=683</li>
+            <li>https://dovrefjell-sunndalsfjella.no/wp-content/uploads/2020/01/DSC_5826_comp.jpg</li>
+            <li>https://media.snl.no/media/195996/standard_1600px-Red_Panda__31150198302_.jpg</li>
+            <li>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mother_and_baby_sperm_whale.jpg/1200px-Mother_and_baby_sperm_whale.jpg</li>
+            <li>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Dimetrodon_incisivum_01.jpg/1920px-Dimetrodon_incisivum_01.jpg</li>
+            <li>https://upload.wikimedia.org/wikipedia/commons/1/1e/Bald_Eagle_Portrait.jpg</li>
+            <li>https://media.snl.no/media/160375/standard_compressed_Galapagos_giant_tortoise_Geochelone_elephantopus.jpg</li>
+        </ol>
+
+    </article>
+</section>
+<footer class="main-footer" style="background-color: goldenrod; color: black">
+    <ul>
+        <p>Author:Sigurd</p>
+    </ul>
+</footer>
+
+</body>
+</html>
