@@ -329,7 +329,7 @@ then light theme you shall get...
 
         border: 2px solid orange;
         min-width: 200px;
-        max-width: 400px;
+        width: 100%;
     }
     .artikel-wrapper {
         border: 2px solid
