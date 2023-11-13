@@ -58,13 +58,9 @@ on all all pages except <whichever page will have different design>
     padding-right: 20px;
 }
 
-/*vilde, solution for the use of br*/
-div {
-    white-space: pre;
-}
 /*Email link*/
 .link {
-    color: hotpink;
+    color:hotpink;
 }
 /*Email link when visited*/
 .link:visited {
@@ -153,6 +149,20 @@ img {
 
 .menu-button-container:hover {
     cursor: pointer;
+}
+
+/* Remove bullet point from list */
+.library-list{
+    list-style-type: none;
+}
+
+/* Remove margin for p and ul children of library-list class */
+.library-list p{
+    margin: 0;
+}
+
+.library-list ul{
+    margin: 0;
 }
 
 #mb-line1 {
