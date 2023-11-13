@@ -58,6 +58,29 @@ on all all pages except <whichever page will have different design>
     padding-right: 20px;
 }
 
+/*vilde, solution for the use of br*/
+div {
+    white-space: pre;
+}
+/*Email link*/
+.link {
+    color: hotpink;
+}
+/*Email link when visited*/
+.link:visited {
+    color: rgb(87, 87, 221);
+}
+/*Mouse over link */
+.link:hover {
+    color: rgb(237, 10, 169);
+}
+/*Library image*/
+img {
+    max-width: 70%;
+    max-height: 50%;
+    display: block;
+  }
+
 .main-sidebar {
     grid-area: sidebar;
     background-color: var(--white-overlay5);
