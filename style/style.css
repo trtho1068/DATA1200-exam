@@ -17,7 +17,11 @@
     --lesser-text-color: var(--dark-theme-text2);
     --overlay5: var(--dark-theme-overlay5);
 
-    --padding: 1em;
+    --base-font-size: 0.875rem;
+    --base-line-height: 1.6;
+    --base-vertical-spacing: calc(var(--base-font-size) *
+                                  var(--base-line-height));
+    --base-horizontal-spacing: 0.5rem;
 }
 
 /*
@@ -27,22 +31,84 @@ are gathered at the end.
 
 * {
     box-sizing: border-box;
-}
-
-html, body, figure {
     margin: 0;
+    padding: 0;
 }
 
-html, body {
+body {
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 1.125rem;
-    line-height: 1.33;
-    height: 100%;
+    font-size: var(--base-font-size);
+    line-height: var(--base-line-height);
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
+    font-weight: normal;
+    margin-top: calc(0.67 * var(--base-vertical-spacing));
+    margin-bottom: calc(0.33 * var(--base-vertical-spacing));
+}
+
+h1 {
+    font-size: 2.082em;
+}
+
+h2 {
+    font-size: 1.842em;
+}
+
+h3 {
+    font-size: 1.63em;
+}
+
+p, figure {
+    margin-top: var(--base-vertical-spacing);
+    margin-bottom: var(--base-vertical-spacing);
+}
+
+p:first-child,
+h1 + p,
+h2 + p,
+h3 + p, h3 + figure {
+    margin-top: 0;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a, footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+p a {
+    color: var(--text-color);
+}
+
+p a:hover {
+    color: var(--color);
 }
 
 figcaption {
     color: var(--lesser-text-color);
-    font-size: 0.75em;
+    font-size: 0.8333em;
+    line-height: 1.9277em;
+}
+
+code {
+    font-size: 0.8333em;
+    background-color: rgba(255,255,255,0.07);
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
 }
 
 img {
@@ -60,9 +126,23 @@ img {
         "content"
         "sidebar"
         "footer";
-    grid-row-gap: var(--padding);
+    grid-row-gap: var(--base-vertical-spacing);
+    grid-column-gap: var(--base-horizontal-spacing);
+    align-items: center;
     color: var(--text-color);
     background-color: var(--bg-color);
+}
+
+.main-header, .main-content, .main-footer {
+    padding-left: calc(2 * var(--base-horizontal-spacing));
+    padding-right: calc(2 * var(--base-horizontal-spacing));
+}
+
+.main-sidebar, .main-footer {
+    font-size: 0.8333em;
+    line-height: 1.9277em;
+    color: var(--lesser-text-color);
+    background-color: var(--overlay5);
 }
 
 .main-header {
@@ -72,29 +152,17 @@ img {
 
 .main-content {
     grid-area: content;
-    padding-left: var(--padding);
-    padding-right: var(--padding);
-    padding-bottom: var(--padding);
 }
 
 .main-sidebar {
     grid-area: sidebar;
-    height: min-content;
-    align-self: center;
-    font-size: 0.75em;
-    line-height: 1.5;
-    color: var(--lesser-text-color);
-    background-color: var(--overlay5);
-    border-radius: 9px;
-    padding: var(--padding);
-}
-
-.main-content a, .main-sidebar a {
-    color: var(--text-color);
-}
-
-.main-content a:hover, .main-sidebar a:hover {
-    color: var(--color);
+    border-radius: 8px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: var(--base-horizontal-spacing);
+    padding-right: var(--base-horizontal-spacing);
+    margin-left: var(--base-horizontal-spacing);
+    margin-right: var(--base-horizontal-spacing);
 }
 
 .main-footer {
@@ -102,48 +170,24 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.75em;
-    line-height: 1.5;
-    color: var(--lesser-text-color);
-    background-color: var(--overlay5);
-    padding-top: var(--padding);
-    padding-bottom: var(--padding);
 }
 
 .main-footer address {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 9px;
-    padding-top: 9px;
-    padding-bottom: 9px;
 }
 
 .main-footer a {
-    color: inherit;
-    text-decoration: none;
-    padding-left: var(--padding);
-    padding-right: var(--padding);
-}
-
-.main-nav {
-    grid-area: nav;
-}
-
-.main-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
 
 /*nav ul display flex for simple switching between vert & horz nav*/
 .main-nav ul {
-    display: flex;
     flex-direction: column;
 }
 
 /*"Home" always visible...*/
-.main-nav ul li:first-child {
+.main-nav li:first-child {
     display: flex;
 }
 
@@ -154,21 +198,24 @@ img {
 }
 
 .main-nav a {
-    color: inherit;
-    text-decoration: none;
-    padding: var(--padding);
+    padding-top: calc(0.5 * var(--base-vertical-spacing));
+    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
+    padding-right: calc(2 * var(--base-horizontal-spacing));
     flex-grow: 1;
+}
+
+.main-nav li:not(:first-child) a {
+    padding-left: calc(2 * var(--base-horizontal-spacing));
 }
 
 .main-nav li:not(:first-child) a:hover {
     background-color: var(--dark-theme-overlay5);
 }
 
-
 /*burger lines*/
 .main-nav label span {
-    height: 2px; /*"burger-height"*/
-    width: 30px;
+    height: 0.1428em; /*"burger-height"*/
+    width: 2em;
     background-color: var(--text-color); /*"burger-color"*/
     border-radius: 2px; /*slightly rounded corners*/
 }
@@ -176,15 +223,15 @@ img {
 /*The box containing the burger menu*/
 .menu-button-container {
     position: absolute;
-    top: 9px;
-    right: 0;
+    top: 0.57142em;
+    right: var(--base-horizontal-spacing);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 30px;
+    height: 2em;
     z-index: 1;
-    padding: 5px;
-    margin: 7px;
+    padding: 0.3em;
+    margin-right: var(--base-horizontal-spacing);
 }
 
 .menu-button-container:hover {
@@ -207,8 +254,8 @@ img {
 #menu-toggle {
     opacity: 0; /*make invisible, display: none would break keyboard nav*/
     position: absolute; /*do not push other content down*/
-    top: 22px;
-    right: 14px;
+    top: 1.125em;
+    right: 2em;
 }
 
 #menu-toggle:focus ~ .menu-button-container {
@@ -224,7 +271,7 @@ img {
 #menu-toggle:checked ~ .menu-button-container #mb-line1 {
     /*drop to mid-box and rotate, note that current impl only works (well)
     for current burger-size*/
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(0.6071em) rotate(45deg);
 }
 
 #menu-toggle:checked ~ .menu-button-container #mb-line2 {
@@ -236,62 +283,94 @@ img {
 }
 
 /*And then we move to larger screens...*/
-@media (min-width: 700px) {
+@media (min-width: 600px) {
+    :root {
+        --base-font-size: 1.25rem;
+    }
+
+    h1, h2, h3 {
+        font-weight: bolder;
+        margin-top: calc(1.5 * var(--base-vertical-spacing));
+        margin-bottom: calc(0.5 * var(--base-vertical-spacing));
+    }
+
+    h1 {
+        font-size: 2.565em;
+    }
+
+    h2 {
+        font-size: 2.192em;
+    }
+
+    h3 {
+        font-size: 1.874em;
+    }
+
+    img.lighthouse-screenshot {
+        width: 87%;
+    }
+
     .main-grid-container {
-        grid-template-columns: 3fr 1fr;
+        grid-template-columns: 1fr auto auto 1fr;
         grid-template-rows: auto 1fr auto;
         grid-template-areas:
-            "header header"
-            "content sidebar"
-            "footer footer";
+            "header header header header"
+            ". content sidebar ."
+            "footer footer footer footer";
+        grid-row-gap: 0;
+        overflow: hidden;
+        height: 100vh;
     }
-    .main-content {
-        overflow-y: scroll;
+
+    .main-header {
+        display: grid;
+        grid-template-columns: auto 58em auto;
+        grid-template-areas:
+            ". nav .";
     }
+
+    .main-nav {
+        grid-area: nav;
+    }
+
     /*horizonal navigation*/
     .main-nav ul {
         flex-direction: row;
     }
+
     /*visible links, must now inherit bg color to avoid looking stupid*/
     .main-nav li:not(:first-child) {
         display: flex;
         background-color: inherit;
     }
+
     /*active page visual cue*/
     .main-nav li:not(:first-child) a.active {
         background-color: var(--dark-theme-overlay5);
     }
+
     /*invisible burger*/
     .menu-button-container {
         display: none;
     }
+
     /*rm burger fm keyboard nav*/
     #menu-toggle {
         display: none;
     }
-}
 
-@media (min-width: 1200px) {
-    img.lighthouse-screenshot {
-        width: 75%;
+    .main-content {
+        height: 100%;
+        overflow-y: scroll;
+        max-width: 40em;
+        min-width: 25em;
     }
-    .main-grid-container {
-        grid-template-columns: 2fr 7fr 2fr 1fr;
-        grid-template-areas:
-            "header header header header"
-            ". content sidebar ."
-            "footer footer footer footer";
-    }
-    /*
-    Want the header bg to fill the width of the screen, but the header
-    content (nav-links) to align with other content. This is one way...
-    better solutions may well exist
-    */
-    .main-header {
-        display: grid;
-        grid-template-columns: 2fr 10fr;
-        grid-template-areas:
-            ". nav";
+
+    .main-sidebar {
+        max-width: 15em;
+        min-width: 12em;
+        max-height: 87%;
+        overflow-y: scroll;
     }
 }
 
@@ -307,18 +386,22 @@ then light theme you shall get...
         --lesser-text-color: var(--light-theme-text2);
         --overlay5: var(--light-theme-overlay5);
     }
+
     img {
         filter: none;
     }
+
     /*...but, I still want a dark header*/
     .main-header {
         color: var(--dark-theme-text);
         background-color: var(--light-theme-text);
     }
+
     /*must keep the burger lines light colored in a dark header*/
     .main-nav label span {
         background-color: var(--dark-theme-text);
     }
+
     /*use shadow to elevate sidebar in light theme*/
     .main-sidebar {
         background-color: var(--light-theme-bg);
