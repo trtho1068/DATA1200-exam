@@ -32,26 +32,42 @@
       </nav>
     </header>
     <main class="main-content">
-      <h1>OsloMet Campus Pilestredet</h1>
+      <h1>Campus Pilestredet</h1>
       <figure>
         <!--
         img copied from https://ansatt.oslomet.no/siste-nytt/-/nyhet/ansetter-leder-for-campusprogrammet-
         -->
-        <img src="img/entrance-close-up.jpg"
-             alt="close-up photo of the entrance of a relevant building">
+        <picture>
+          <source media="(min-width: 700px)"
+                  type="image/webp"
+                  srcset="img/oslomet-desktop.webp"
+                  width="1180"
+                  height="590">
+          <source media="(min-width: 700px)"
+                  type="image/jpeg"
+                  srcset="img/oslomet-desktop.jpg"
+                  width="1180"
+                  height="590">
+          <source type="image/webp"
+                  srcset="img/oslomet-mobile.webp"
+                  width="938"
+                  height="625">
+          <img src="img/oslomet-mobile.jpg"
+               alt="Close up photo of of a relevant building.
+                    Large yellow OsloMet logo on dark and yellow background."
+               width="938"
+               height="625">
+        </picture>
         <figcaption>
-          Photo: OsloMet
+          &copy Benjamin A. Ward
         </figcaption>
       </figure>
       <p>
-        Welcome! Here we present to you our campus at OsloMet Pilestredet. You
-        will learn about a few of our favorite locations, and on the topical
+        Welcome! Here we present our campus at OsloMet Pilestredet.
+        You will learn about a few of our favorite locations, and on the topical
         page we will let you peek into one of the many weird interests people
-        may have here.
-      </p>
-      <p>
-        On the accessibility page you can read about how we used automated
-        accessibility tests while creating this site, to try our best to make
+        may have here. On the accessibility page you can read about how we used
+        automated tests while creating this site, to try our best to make
         it accessible for everyone.
       </p>
     </main>
