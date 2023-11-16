@@ -133,7 +133,7 @@ img {
     background-color: var(--bg-color);
 }
 
-.main-header, .main-content, .main-footer {
+.main-content, .main-footer {
     padding-left: calc(2 * var(--base-horizontal-spacing));
     padding-right: calc(2 * var(--base-horizontal-spacing));
 }
@@ -200,13 +200,11 @@ img {
 .main-nav a {
     padding-top: calc(0.5 * var(--base-vertical-spacing));
     padding-bottom: calc(0.5 * var(--base-vertical-spacing));
+    padding-left: calc(2 * var(--base-horizontal-spacing));
     padding-right: calc(2 * var(--base-horizontal-spacing));
     flex-grow: 1;
 }
 
-.main-nav li:not(:first-child) a {
-    padding-left: calc(2 * var(--base-horizontal-spacing));
-}
 
 .main-nav li:not(:first-child) a:hover {
     background-color: var(--dark-theme-overlay5);
