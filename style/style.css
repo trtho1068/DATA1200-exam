@@ -334,3 +334,72 @@ then light theme you shall get...
         rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
 }
+
+#hero-animal {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                      url("../img/hero-lion.jpg");
+    min-height: 67vh;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero-animal h1,
+#hero-animal p {
+    color: var(--dark-theme-text);
+}
+
+.animal-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 2px solid black;
+    justify-items: center;
+}
+
+.animal-card {
+    max-width: 40em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hero-animal p,
+.animal-card p {
+    max-width: 20em;
+    text-align: center;
+}
+
+.animal-card p {
+    font-size: 0.833em;
+    line-height: 1.977em;
+}
+
+@media (min-width: 50em) {
+    .animal-grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 70em) {
+    .animal-grid-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 600px) {
+    #hero-animal {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                          url("../img/hero-eagle-narrower.jpg");
+        min-height: 50vh;
+    }
+}
+
+@media (min-width: 1200px) {
+    #hero-animal {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                          url("../img/hero-eagle.jpg");
+        min-height: 50vh;
+    }
+}
