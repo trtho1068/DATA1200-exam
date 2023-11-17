@@ -16,7 +16,6 @@
     --text-color: var(--dark-theme-text);
     --lesser-text-color: var(--dark-theme-text2);
     --overlay5: var(--dark-theme-overlay5);
-
     --padding: 1em;
 }
 
@@ -327,11 +326,11 @@ then light theme you shall get...
 
     .img-topi {
 
-        border: 2px solid orange;
+        /*border: 2px solid orange;*/
         min-width: 200px;
         width: 100%;
     }
     .artikel-wrapper {
-        border: 2px solid
+        /*border: 2px solid*/
     }
 }
