@@ -6,23 +6,23 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="style/style.css">
   </head>
-  <body class="main-grid-container">
-    <header class="main-header">
-      <nav class="main-nav">
-        <input id="menu-toggle" type="checkbox" role="button">
+  <body>
+    <header class="stick-to-top">
+      <nav>
+        <input id="menu-toggle" type="checkbox" aria-label="Toggle Navigation">
         <ul>
           <li>
             <a href="index.html">Home</a>
           </li>
           <li>
-            <a href="somewhere-on-campus.html">Blah</a>
+            <a href="study.html">Study</a>
           </li>
           <li>
-            <a href="topical.html">Topical</a>
+            <a href="library.html">Library</a>
           </li>
           <li>
-            <a href="about-us.html">About Us</a>
-       </li>
+            <a href="animals.html">Animals</a>
+          </li>
           <li>
             <a class="active" href="accessibility.html">Accessibility</a>
           </li>
@@ -34,24 +34,194 @@
         </label>
       </nav>
     </header>
-    <main class="main-content">
-      <h1>Heading One</h1>
-      <p>
-      Content
-      </p>
-      <h2>Heading Two</h2>
-      <p>
-      Content
-      </p>
-      <h2>Heading Two</h2>
-      <p>
-        Content
-      </p>
-    </main>
-    <aside class="main-sidebar">
-      Sidebar
-    </aside>
-    <footer class="main-footer">
+    <div class="content-container">
+      <main class="main-content">
+        <h1>Testing our site</h1>
+        <p>
+          Here we go through how we used automated and manual testing to try and
+          improve our site, primarily by making it more accessible. We've used
+          <a href="https://developer.chrome.com/docs/lighthouse/overview/"
+             title="Go to Google Lighthouse documentation">
+            Google Lighthouse</a> for the automated tests.
+        </p>
+        <h2>Automated tests</h2>
+        <p>
+          The first test was run on November 8th 2023 against
+          <a href="https://github.com/trtho1068/DATA1200-exam/tree/3d7dfdce93048a225217ddd9cb7c3eeb37ceb6c8"
+             target="_blank"> this commit</a>.
+        </p>
+        <figure>
+          <img src="img/accessibility01.png"
+               alt="screenshot of Lighthouse scores"
+               class="lighthouse-screenshot"
+               width="778"
+               height="143">
+          <figcaption>
+            Lighthouse scores from the first automated test.
+          </figcaption>
+        </figure>
+        <p>
+          Our overall accessibility score is 94, not so bad, but there is room
+          for improvement. There is also an accessibility related issue in the
+          SEO section, we will come back to that. We begin by looking at the
+          actual accessibility section of the test results.
+        </p>
+        <h3>Accessibility</h3>
+        <figure>
+          <img src="img/accessibility01-labels.png"
+               alt="screenshot of form element issue"
+               class="lighthouse-screenshot"
+               width="778"
+               height="60">
+        </figure>
+        <p>
+          This issue relates to our hamburger menu, where we use a checkbox
+          <code>&ltinput&gt</code> element and an associated
+          <code>&ltlabel&gt</code>. Lighthouse complains that the checkbox
+          does not have an associated label. Because we do actually state
+          what element the label is for, I suspect that this happens because
+          our label does not contain any text, but instead contains three
+          <code>&ltspan&gt</code> elements each representing a piece of the
+          burger.
+        </p>
+        <p>
+          How is a screen reader supposed to read that you ask? I don't
+          know. One could imagine adding some text, and then some trickery
+          to make it invisible, at the time of writing this is not a priority.
+        </p>
+        <p>
+          I was also a bit naive and assigned <code>role="button"</code>
+          to our hidden hamburger menu checkbox, thinking that was all well and
+          good.
+        </p>
+        <figure>
+          <img src="img/accessibility01-aria.png"
+               alt="screenshot of aria role issue"
+               class="lighthouse-screenshot"
+               width="778"
+               height="60">
+        </figure>
+        <p>
+          After reading a little bit
+          <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#toggle_buttons"
+             title="Read about aria role button on MDN Web Docs">
+            about the topic
+          </a> I conclude that the idea wasn't all bad as we do in fact use
+          the checkbox as a toggle button. However, if my understanding was
+          correct we should also use the <code>aria-pressed</code> attribute
+          to turn the element into a toggle button. Depending on the state of
+          the checkbox we would then need to update <code>aria-pressed</code>
+          accordingly which I can imagine requires some JavaScript.
+        </p>
+        <p>
+          Another option which I think might be a slight improvement on both of
+          the above issues is to add an
+          <code>aria-label</code> to the checkbox as is done in
+          <a href="https://unused-css.com/blog/css-only-hamburger-menu/"
+             target="_blank"
+             title="Go unused-css.com burger menu example">
+            this example</a>. Straight forward solution with no JS required,
+          this is what we go for.
+        </p>
+        <h3>SEO</h3>
+        <figure>
+          <img src="img/accessibility01-mobile-friendly.png"
+               alt="screenshot of tap target issue"
+               class="lighthouse-screenshot"
+               width="797"
+               height="63">
+        </figure>
+        <p>
+          Lighthouse wants us to be more mobile friendly, more specifically
+          by appropriately sizing/spacing our tap targets. The unapproved
+          targets are the email address links in our footer. This is issue is
+          entirely avoidable, so we make sure to do better before next test.
+        </p>
+        <p>
+          There is one more complaint in the SEO section about a document
+          without a meta description, this is because the file topical.html
+          was empty at this stage.
+        </p>
+        <h3>Performance</h3>
+        <p>
+          A few other issues are grouped under performance and relates
+          primarily to images, which at this stage there was only one of.
+        </p>
+        <figure>
+          <img src="img/accessibility01-perf-diagnostics.png"
+               alt="screenshot of Lighthouse performance diagnostics overview"
+               class="lighthouse-screenshot"
+               width="797"
+               height="299">
+          <figcaption>
+            Performance diagnostics from the first automated test.
+          </figcaption>
+        </figure>
+        <p>
+          Setting an explicit width and height is fairly straightforward,
+          when using the <code>&ltimg&gt</code> tag Intellij will even suggest
+          the appropriate values.
+        </p>
+        <p>
+          Properly sizing images is a little trickier. The consequence of too
+          large images is wasted bytes and slower page load.
+          To improve on what was, we replace the image on the home page,
+          with two cropped versions. One for mobile and one for desktop, and
+          make sure the sizes are at least closer to the size
+          we actually need.
+        </p>
+        <p>
+          To serve images in next-gen formats we convert them to webp. We provide
+          jpg fallbacks for browsers not supporting webp.
+        </p>
+        <p>
+          Caching resources is not part of DATA1200, so this suggestion we
+          ignore.
+        </p>
+        <h2>Other considerations</h2>
+        <p>
+          We have chosen to implement both a light and a dark theme as there are
+          many people out there, myself included, who prefer a dark theme most
+          of the time. There are also circumstances like light conditions and
+          time of day, that may favor one over the other.
+        </p>
+        <p>
+          A full-blown solution including a site toggle button to
+          override system/browser settings would require some JavaScript to
+          remember theme between page reloads. We do not deviate from our no JS
+          policy, and implement only the <code>@prefers-color-scheme</code>
+          media query. To see the effect one can f.ex. toggle between light
+          mode and dark mode in firefox.
+        </p>
+        <p>
+          While working on the hamburger menu we initially used
+          <code>display: none;</code> to make the checkbox invisible, but then we
+          realized that doing so makes the checkbox and thus navigation impossible
+          to reach using keyboard only. The simple solution is to use
+          <code>opacity: 0;</code> instead.
+        </p>
+        <p>
+          We also make sure that the burger
+          has a visual cue when it has input focus, and we intentionally remove it
+          from keyboard navigation on wider screens were we always display
+          all nav links.
+        </p>
+        <p>
+          We have tried to make a simple and intuitive UI that should be easy to
+          understand and navigate.
+        </p>
+      </main>
+      <aside class="side-content">
+        <p>
+          If you're interested, you can read about how to make the most
+          <a href="https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/"
+             target="_blank">
+            inaccessible website possible</a> while still maintaining a perfect
+          Lighthouse score.
+        </p>
+      </aside>
+    </div>
+    <footer>
       <!--
       The address tag defines contact info for it's nearest body or article
       ancestor
