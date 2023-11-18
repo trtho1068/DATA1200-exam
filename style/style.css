@@ -119,6 +119,11 @@ footer address {
     align-items: center;
 }
 
+footer, code {
+    font-size: var(--secondary-font-size);
+    line-height: var(--secondary-line-height);
+}
+
 h1, h2, h3 {
     line-height: 1.25;
     font-weight: normal;
@@ -173,11 +178,6 @@ code {
     padding-right: 0.2em;
     padding-top: 0.1em;
     padding-bottom: 0.1em;
-}
-
-footer, code {
-    font-size: var(--secondary-font-size);
-    line-height: var(--secondary-line-height);
 }
 
 img {
@@ -288,7 +288,7 @@ img {
 .animal-content-inner-container {
     grid-area: animal-cards;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     column-gap: calc(4 * var(--base-horizontal-spacing));
     row-gap: var(--base-vertical-spacing);
 }
@@ -319,7 +319,6 @@ img {
 }
 
 .animal-card {
-    max-width: 40em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -420,9 +419,9 @@ img {
     }
 
     .animal-content-outer-container {
-        grid-template-columns: 1fr 3fr 3fr 1fr;
+        grid-template-columns: 1fr 10fr 1fr;
         grid-template-areas:
-            ". animal-cards animal-cards .";
+            ". animal-cards .";
     }
 
     .main-content, .side-content {
@@ -442,16 +441,13 @@ img {
     }
 }
 
+/*Sidebar kept on the side as long as it looks alright*/
 @media (min-width: 75em) {
     .content-container {
         grid-template-columns: 1fr auto auto 1fr;
         grid-template-rows: 1fr;
         grid-template-areas:
             ". main sidebar .";
-    }
-
-    .animal-content-inner-container {
-        grid-template-columns: 1fr 1fr;
     }
 
     .side-content {
