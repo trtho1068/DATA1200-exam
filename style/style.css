@@ -314,6 +314,10 @@ img {
     grid-area: main;
 }
 
+.main-content ul {
+    padding-left: calc(4 * var(--base-horizontal-spacing));
+}
+
 .side-content {
     grid-area: sidebar;
 }
