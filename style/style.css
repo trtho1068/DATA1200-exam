@@ -178,9 +178,6 @@ img {
     align-items: center;
 }
 
-.main-footer a {
-}
-
 /*nav ul display flex for simple switching between vert & horz nav*/
 .main-nav ul {
     flex-direction: column;
