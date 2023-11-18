@@ -39,13 +39,10 @@ are gathered at the end.
 }
 
 /*
-Traditional "sticky" footer pattern in top level container
-Content area will contain nested grids with themed background
+Traditional "sticky" footer pattern and themed bg impl in outermost
+container on all pages.
 */
 body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: var(--base-font-size);
-    line-height: var(--base-line-height);
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
@@ -53,9 +50,14 @@ body {
         "content"
         "footer";
     min-height: 100vh;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: var(--base-font-size);
+    line-height: var(--base-line-height);
 }
 
-/*Header is always dark*/
+/*Stays dark in light theme*/
 header {
     grid-area: header;
     color: var(--dark-theme-text);
@@ -80,6 +82,11 @@ nav li:not(:first-child){
     background-color: var(--dark-theme-elevated-bg);
 }
 
+/*make entire rows clickable in dropdown*/
+nav li:not(:first-child) a {
+    flex-grow: 1;
+}
+
 /*TODO: need another level of elevation for dropdown links*/
 nav li:not(:first-child) a:hover {
     background-color: var(--dark-theme-elevated-bg);
@@ -90,7 +97,6 @@ nav a {
     padding-bottom: calc(0.5 * var(--base-vertical-spacing));
     padding-left: calc(2 * var(--base-horizontal-spacing));
     padding-right: calc(2 * var(--base-horizontal-spacing));
-    flex-grow: 1;
 }
 
 nav a, footer a {
@@ -251,9 +257,7 @@ img {
     transform: scaleY(0); /*disappear*/
 }
 
-.color-theme-container {
-    color: var(--text-color);
-    background-color: var(--bg-color);
+.content-container, .animal-content-outer-container {
     padding-top: var(--base-vertical-spacing);
     padding-bottom: var(--base-vertical-spacing);
     padding-left: calc(2 * var(--base-horizontal-spacing));
