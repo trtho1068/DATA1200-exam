@@ -1,15 +1,15 @@
 :root {
-    --dark-theme-color: rgba(189, 147,249,1);
-    --dark-theme-bg: rgba(25,25,25,1);
-    --dark-theme-text: rgba(255,255,255,0.87);
-    --dark-theme-text2: rgba(255,255,255,0.6);
-    --dark-theme-overlay5: rgba(255,255,255,0.05);
+    --dark-theme-color: rgba(189, 147, 249, 1);
+    --dark-theme-bg: rgba(25, 25, 25, 1);
+    --dark-theme-text: rgba(255, 255, 255, 0.87);
+    --dark-theme-text2: rgba(255, 255, 255, 0.6);
+    --dark-theme-overlay5: rgba(255, 255, 255, 0.05);
 
-    --light-theme-color: rgba(211,74,151,1);
-    --light-theme-bg: rgba(247,247,247,1);
-    --light-theme-text: rgba(34,36,48,1);
-    --light-theme-text2: rgba(34,36,48,0.87);
-    --light-theme-overlay5: rgba(34,36,48,0.07);
+    --light-theme-color: rgba(211, 74, 151, 1);
+    --light-theme-bg: rgba(247, 247, 247, 1);
+    --light-theme-text: rgba(34, 36, 48, 1);
+    --light-theme-text2: rgba(34, 36, 48, 0.87);
+    --light-theme-overlay5: rgba(34, 36, 48, 0.07);
 
     --color: var(--dark-theme-color);
     --bg-color: var(--dark-theme-bg);
@@ -28,11 +28,14 @@ are gathered at the end.
     box-sizing: border-box;
 }
 
-html, body, figure {
+html,
+body,
+figure {
     margin: 0;
 }
 
-html, body {
+html,
+body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 1.125rem;
     line-height: 1.33;
@@ -88,11 +91,13 @@ img {
     padding: var(--padding);
 }
 
-.main-content a, .main-sidebar a {
+.main-content a,
+.main-sidebar a {
     color: var(--text-color);
 }
 
-.main-content a:hover, .main-sidebar a:hover {
+.main-content a:hover,
+.main-sidebar a:hover {
     color: var(--color);
 }
 
@@ -147,7 +152,7 @@ img {
 }
 
 /*...other nav links are not, make parent li invisible*/
-.main-nav li:not(:first-child){
+.main-nav li:not(:first-child) {
     display: none;
     background-color: var(--dark-theme-overlay5);
 }
@@ -166,10 +171,13 @@ img {
 
 /*burger lines*/
 .main-nav label span {
-    height: 2px; /*"burger-height"*/
+    height: 2px;
+    /*"burger-height"*/
     width: 30px;
-    background-color: var(--text-color); /*"burger-color"*/
-    border-radius: 2px; /*slightly rounded corners*/
+    background-color: var(--text-color);
+    /*"burger-color"*/
+    border-radius: 2px;
+    /*slightly rounded corners*/
 }
 
 /*The box containing the burger menu*/
@@ -204,34 +212,37 @@ img {
 
 /*The invisible checkbox associated with the burger*/
 #menu-toggle {
-    opacity: 0; /*make invisible, display: none would break keyboard nav*/
-    position: absolute; /*do not push other content down*/
+    opacity: 0;
+    /*make invisible, display: none would break keyboard nav*/
+    position: absolute;
+    /*do not push other content down*/
     top: 22px;
     right: 14px;
 }
 
-#menu-toggle:focus ~ .menu-button-container {
+#menu-toggle:focus~.menu-button-container {
     outline: 1px solid var(--dark-theme-text2);
 }
 
 /*Make the invisible visible*/
-#menu-toggle:checked ~ ul li:not(:first-child) {
+#menu-toggle:checked~ul li:not(:first-child) {
     display: flex;
 }
 
 /*Make the burger become an X...*/
-#menu-toggle:checked ~ .menu-button-container #mb-line1 {
+#menu-toggle:checked~.menu-button-container #mb-line1 {
     /*drop to mid-box and rotate, note that current impl only works (well)
     for current burger-size*/
     transform: translateY(9px) rotate(45deg);
 }
 
-#menu-toggle:checked ~ .menu-button-container #mb-line2 {
+#menu-toggle:checked~.menu-button-container #mb-line2 {
     transform: rotate(-45deg);
 }
 
-#menu-toggle:checked ~ .menu-button-container #mb-line3 {
-    transform: scaleY(0); /*disappear*/
+#menu-toggle:checked~.menu-button-container #mb-line3 {
+    transform: scaleY(0);
+    /*disappear*/
 }
 
 /*And then we move to larger screens...*/
@@ -244,23 +255,28 @@ img {
             "content sidebar"
             "footer footer";
     }
+
     /*horizonal navigation*/
     .main-nav ul {
         flex-direction: row;
     }
+
     /*visible links, must now inherit bg color to avoid looking stupid*/
     .main-nav li:not(:first-child) {
         display: flex;
         background-color: inherit;
     }
+
     /*active page visual cue*/
     .main-nav li:not(:first-child) a.active {
         background-color: var(--dark-theme-overlay5);
     }
+
     /*invisible burger*/
     .menu-button-container {
         display: none;
     }
+
     /*rm burger fm keyboard nav*/
     #menu-toggle {
         display: none;
@@ -275,6 +291,7 @@ img {
             ". content sidebar ."
             "footer footer footer footer";
     }
+
     /*
     Want the header bg to fill the width of the screen, but the header
     content (nav-links) to align with other content. This is one way...
@@ -300,18 +317,22 @@ then light theme you shall get...
         --lesser-text-color: var(--light-theme-text2);
         --overlay5: var(--light-theme-overlay5);
     }
+
     img {
         filter: none;
     }
+
     /*...but, I still want a dark header*/
     .main-header {
         color: var(--dark-theme-text);
         background-color: var(--light-theme-text);
     }
+
     /*must keep the burger lines light colored in a dark header*/
     .main-nav label span {
         background-color: var(--dark-theme-text);
     }
+
     /*use shadow to elevate sidebar in light theme*/
     .main-sidebar {
         background-color: var(--light-theme-bg);
@@ -320,17 +341,20 @@ then light theme you shall get...
         multiple shadow effects separated by comma
         */
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-                    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
 
-
+    /* additional styling for imgs */
     .img-topi {
-
-        /*border: 2px solid orange;*/
         min-width: 200px;
         width: 100%;
     }
+
+    /* additional styling for the articles container */
     .artikel-wrapper {
-        /*border: 2px solid*/
+        display: inline-block;
+        margin: 5px;
+        padding: 5px;
+        border: 0px solid;
     }
 }
