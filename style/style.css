@@ -1,24 +1,27 @@
 :root {
     --dark-theme-color: rgba(189, 147,249,1);
     --dark-theme-bg: rgba(25,25,25,1);
+    --dark-theme-elevated-bg: rgba(37,37,37,1);
     --dark-theme-text: rgba(255,255,255,0.87);
-    --dark-theme-text2: rgba(255,255,255,0.6);
-    --dark-theme-overlay5: rgba(255,255,255,0.05);
+    --dark-theme-secondary-text: rgba(255,255,255,0.6);
 
     --light-theme-color: rgba(211,74,151,1);
-    --light-theme-bg: rgba(247,247,247,1);
+    --light-theme-bg: rgba(255,255,255,1);
+    --light-theme-elevated-bg: rgba(255,255,255,1);
     --light-theme-text: rgba(34,36,48,1);
-    --light-theme-text2: rgba(34,36,48,0.87);
-    --light-theme-overlay5: rgba(34,36,48,0.07);
+    --light-theme-secondary-text: rgba(34,36,48,0.87);
 
     --color: var(--dark-theme-color);
     --bg-color: var(--dark-theme-bg);
+    --elevated-bg-color: var(--dark-theme-elevated-bg);
     --text-color: var(--dark-theme-text);
-    --lesser-text-color: var(--dark-theme-text2);
-    --overlay5: var(--dark-theme-overlay5);
+    --secondary-text-color: var(--dark-theme-secondary-text);
 
     --base-font-size: 0.875rem;
     --base-line-height: 1.6;
+    --secondary-font-size: 0.833em;
+    --secondary-line-height: 1.9277;
+
     --base-vertical-spacing: calc(var(--base-font-size) *
                                   var(--base-line-height));
     --base-horizontal-spacing: 0.5rem;
@@ -35,16 +38,95 @@ are gathered at the end.
     padding: 0;
 }
 
+/*
+Traditional "sticky" footer pattern and themed bg impl in outermost
+container on all pages.
+*/
 body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "content"
+        "footer";
+    min-height: 100vh;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     font-family: Helvetica, Arial, sans-serif;
     font-size: var(--base-font-size);
     line-height: var(--base-line-height);
 }
 
+/*Stays dark in light theme*/
+header {
+    grid-area: header;
+    color: var(--dark-theme-text);
+    background-color: var(--dark-theme-elevated-bg);
+}
+
+/*nav ul display flex for simple switching between vert & horz nav*/
+nav ul {
+    flex-direction: column;
+    display: flex;
+    list-style-type: none;
+}
+
+/*"Home" always visible...*/
+nav li:first-child {
+    display: flex;
+}
+
+/*...other nav links are not, make parent li invisible*/
+nav li:not(:first-child){
+    display: none;
+    background-color: var(--dark-theme-elevated-bg);
+}
+
+/*make entire rows clickable in dropdown*/
+nav li:not(:first-child) a {
+    flex-grow: 1;
+}
+
+/*TODO: need another level of elevation for dropdown links*/
+nav li:not(:first-child) a:hover {
+    background-color: var(--dark-theme-elevated-bg);
+}
+
+nav a {
+    padding-top: calc(0.5 * var(--base-vertical-spacing));
+    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
+    padding-left: calc(2 * var(--base-horizontal-spacing));
+    padding-right: calc(2 * var(--base-horizontal-spacing));
+}
+
+nav a, footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark-theme-secondary-text);
+    background-color: var(--dark-theme-elevated-bg);
+}
+
+footer address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer, code {
+    font-size: var(--secondary-font-size);
+    line-height: var(--secondary-line-height);
+}
+
 h1, h2, h3 {
     line-height: 1.25;
     font-weight: normal;
-    margin-top: calc(0.67 * var(--base-vertical-spacing));
     margin-bottom: calc(0.33 * var(--base-vertical-spacing));
 }
 
@@ -76,18 +158,6 @@ p:last-child {
     margin-bottom: 0;
 }
 
-nav ul {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav a, footer a {
-    color: inherit;
-    text-decoration: none;
-}
-
 p a {
     color: var(--text-color);
 }
@@ -97,13 +167,12 @@ p a:hover {
 }
 
 figcaption {
-    color: var(--lesser-text-color);
-    font-size: 0.8333em;
-    line-height: 1.9277em;
+    color: var(--secondary-text-color);
+    font-size: var(--secondary-font-size);
+    line-height: var(--secondary-line-height);
 }
 
 code {
-    font-size: 0.8333em;
     background-color: rgba(255,255,255,0.07);
     padding-left: 0.2em;
     padding-right: 0.2em;
@@ -118,106 +187,6 @@ img {
     filter: grayscale(38%);
 }
 
-.main-grid-container {
-    display: grid;
-    grid-template-rows: auto 1fr auto auto;
-    grid-template-areas:
-        "header"
-        "content"
-        "sidebar"
-        "footer";
-    grid-row-gap: var(--base-vertical-spacing);
-    grid-column-gap: var(--base-horizontal-spacing);
-    align-items: center;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-}
-
-.main-content, .main-footer {
-    padding-left: calc(2 * var(--base-horizontal-spacing));
-    padding-right: calc(2 * var(--base-horizontal-spacing));
-}
-
-.main-sidebar, .main-footer {
-    font-size: 0.8333em;
-    line-height: 1.9277em;
-    color: var(--lesser-text-color);
-    background-color: var(--overlay5);
-}
-
-.main-header {
-    grid-area: header;
-    background-color: var(--overlay5);
-}
-
-.main-content {
-    grid-area: content;
-}
-
-.main-sidebar {
-    grid-area: sidebar;
-    border-radius: 8px;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    padding-left: var(--base-horizontal-spacing);
-    padding-right: var(--base-horizontal-spacing);
-    margin-left: var(--base-horizontal-spacing);
-    margin-right: var(--base-horizontal-spacing);
-}
-
-.main-footer {
-    grid-area: footer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-footer address {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.main-footer a {
-}
-
-/*nav ul display flex for simple switching between vert & horz nav*/
-.main-nav ul {
-    flex-direction: column;
-}
-
-/*"Home" always visible...*/
-.main-nav li:first-child {
-    display: flex;
-}
-
-/*...other nav links are not, make parent li invisible*/
-.main-nav li:not(:first-child){
-    display: none;
-    background-color: var(--dark-theme-overlay5);
-}
-
-.main-nav a {
-    padding-top: calc(0.5 * var(--base-vertical-spacing));
-    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
-    padding-left: calc(2 * var(--base-horizontal-spacing));
-    padding-right: calc(2 * var(--base-horizontal-spacing));
-    flex-grow: 1;
-}
-
-
-.main-nav li:not(:first-child) a:hover {
-    background-color: var(--dark-theme-overlay5);
-}
-
-/*burger lines*/
-.main-nav label span {
-    height: 0.1428em; /*"burger-height"*/
-    width: 2em;
-    background-color: var(--text-color); /*"burger-color"*/
-    border-radius: 2px; /*slightly rounded corners*/
-}
-
 /*The box containing the burger menu*/
 .menu-button-container {
     position: absolute;
@@ -230,6 +199,14 @@ img {
     z-index: 1;
     padding: 0.3em;
     margin-right: var(--base-horizontal-spacing);
+}
+
+/*burger lines*/
+.menu-button-container span {
+    height: 0.1428em; /*"burger-height"*/
+    width: 2em;
+    background-color: var(--dark-theme-text); /*"burger-color"*/
+    border-radius: 2px; /*slightly rounded corners*/
 }
 
 .menu-button-container:hover {
@@ -257,7 +234,7 @@ img {
 }
 
 #menu-toggle:focus ~ .menu-button-container {
-    outline: 1px solid var(--dark-theme-text2);
+    outline: 1px solid var(--dark-theme-secondary-text);
 }
 
 /*Make the invisible visible*/
@@ -280,6 +257,108 @@ img {
     transform: scaleY(0); /*disappear*/
 }
 
+.content-container, .animal-content-outer-container {
+    padding-top: var(--base-vertical-spacing);
+    padding-bottom: var(--base-vertical-spacing);
+    padding-left: calc(2 * var(--base-horizontal-spacing));
+    padding-right: calc(2 * var(--base-horizontal-spacing));
+}
+
+/*Content on all pages except Animals*/
+.content-container {
+    grid-area: content;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "main"
+        "sidebar";
+    row-gap: var(--base-vertical-spacing);
+    column-gap: calc(2 * var(--base-horizontal-spacing));
+    align-items: start;
+}
+
+/*Animal content outer, simply delegates an area to the inner grid*/
+.animal-content-outer-container {
+    grid-area: content;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "animal-cards";
+}
+
+.animal-content-inner-container {
+    grid-area: animal-cards;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    column-gap: calc(4 * var(--base-horizontal-spacing));
+    row-gap: var(--base-vertical-spacing);
+}
+
+.main-content, .side-content, .animal-card {
+    padding-left: calc(2* var(--base-horizontal-spacing));
+    padding-right: calc(2* var(--base-horizontal-spacing));
+    padding-top: calc(0.5 * var(--base-vertical-spacing));
+    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
+}
+
+.side-content, .animal-card {
+    background-color: var(--elevated-bg-color);
+    border-radius: var(--base-horizontal-spacing);
+}
+
+.side-content p, .animal-card p {
+    font-size: var(--secondary-font-size);
+    line-height: var(--secondary-line-height);
+}
+
+.main-content {
+    grid-area: main;
+}
+
+.side-content {
+    grid-area: sidebar;
+}
+
+.animal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animal-card h2 {
+    margin-top: 0;
+    font-size: 1.277em;
+    font-weight: lighter;
+}
+
+.stick-to-top {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#hero-animal {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                      url("../img/hero-lion.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero-animal h1,
+#hero-animal p {
+    color: var(--dark-theme-text);
+}
+
+#hero-animal p,
+.animal-card p {
+    max-width: 20em;
+    text-align: center;
+}
+
 /*And then we move to larger screens...*/
 @media (min-width: 600px) {
     :root {
@@ -288,8 +367,11 @@ img {
 
     h1, h2, h3 {
         font-weight: bolder;
-        margin-top: calc(1.5 * var(--base-vertical-spacing));
         margin-bottom: calc(0.5 * var(--base-vertical-spacing));
+    }
+
+    h2, h3 {
+        margin-top: calc(1.5 * var(--base-vertical-spacing));
     }
 
     h1 {
@@ -304,47 +386,24 @@ img {
         font-size: 1.874em;
     }
 
-    img.lighthouse-screenshot {
-        width: 87%;
-    }
-
-    .main-grid-container {
-        grid-template-columns: 1fr auto auto 1fr;
-        grid-template-rows: auto 1fr auto;
-        grid-template-areas:
-            "header header header header"
-            ". content sidebar ."
-            "footer footer footer footer";
-        grid-row-gap: 0;
-        overflow: hidden;
-        height: 100vh;
-    }
-
-    .main-header {
-        display: grid;
-        grid-template-columns: auto 58em auto;
-        grid-template-areas:
-            ". nav .";
-    }
-
-    .main-nav {
-        grid-area: nav;
-    }
-
-    /*horizonal navigation*/
-    .main-nav ul {
+    /*horizontal navigation*/
+    nav ul {
         flex-direction: row;
     }
 
     /*visible links, must now inherit bg color to avoid looking stupid*/
-    .main-nav li:not(:first-child) {
+    nav li:not(:first-child) {
         display: flex;
         background-color: inherit;
     }
 
     /*active page visual cue*/
-    .main-nav li:not(:first-child) a.active {
-        background-color: var(--dark-theme-overlay5);
+    nav li:not(:first-child) a.active {
+        background-color: var(--dark-theme-elevated-bg);
+    }
+
+    img.lighthouse-screenshot {
+        width: 87%;
     }
 
     /*invisible burger*/
@@ -352,23 +411,52 @@ img {
         display: none;
     }
 
+    .content-container {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-areas:
+            ". main ."
+            ". sidebar .";
+    }
+
+    .animal-content-outer-container {
+        grid-template-columns: 1fr 10fr 1fr;
+        grid-template-areas:
+            ". animal-cards .";
+    }
+
+    .main-content, .side-content {
+        max-width: 40em;
+    }
+
     /*rm burger fm keyboard nav*/
     #menu-toggle {
         display: none;
     }
 
-    .main-content {
-        height: 100%;
-        overflow-y: scroll;
-        max-width: 40em;
-        min-width: 25em;
+    #hero-animal {
+        background-image: linear-gradient(to right, rgba(0,0,0,0.75),
+                                          rgba(0,0,0,0.25)),
+                          url("../img/hero-eagle.jpg");
+        height: 50vh;
+    }
+}
+
+/*Sidebar kept on the side as long as it looks alright*/
+@media (min-width: 75em) {
+    .content-container {
+        grid-template-columns: 1fr auto auto 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            ". main sidebar .";
     }
 
-    .main-sidebar {
-        max-width: 15em;
-        min-width: 12em;
-        max-height: 87%;
-        overflow-y: scroll;
+    .side-content {
+        width: 13em;
+        max-height: 50vh;
+        overflow-y: hidden;
+        align-self: start;
+        position: sticky;
+        top: calc(5.5 * var(--base-vertical-spacing));
     }
 }
 
@@ -381,33 +469,28 @@ then light theme you shall get...
         --color: var(--light-theme-color);
         --bg-color: var(--light-theme-bg);
         --text-color: var(--light-theme-text);
-        --lesser-text-color: var(--light-theme-text2);
-        --overlay5: var(--light-theme-overlay5);
+        --secondary-text-color: var(--light-theme-secondary-text);
+        --elevated-bg-color: var(--light-theme-elevated-bg);
+    }
+
+    footer {
+       color: var(--light-theme-secondary-text);
+       background-color: var(--light-theme-bg);
+       border-top: 1px solid rgba(34,36,48,0.38);
     }
 
     img {
         filter: none;
     }
 
-    /*...but, I still want a dark header*/
-    .main-header {
-        color: var(--dark-theme-text);
-        background-color: var(--light-theme-text);
-    }
-
-    /*must keep the burger lines light colored in a dark header*/
-    .main-nav label span {
-        background-color: var(--dark-theme-text);
-    }
-
-    /*use shadow to elevate sidebar in light theme*/
-    .main-sidebar {
-        background-color: var(--light-theme-bg);
+    /*use shadow to elevate content in light theme*/
+    .side-content, .animal-card {
         /*
-        shadow fm here: https://getcssscan.com/css-box-shadow-examples
+        shadow #56 copied fm here: https://getcssscan.com/css-box-shadow-examples
         multiple shadow effects separated by comma
         */
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-                    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+                    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
     }
 }
