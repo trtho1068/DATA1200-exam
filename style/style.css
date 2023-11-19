@@ -24,7 +24,7 @@
 
     --base-vertical-spacing: calc(var(--base-font-size) *
                                   var(--base-line-height));
-    --base-horizontal-spacing: 0.5rem;
+    --base-horizontal-spacing: 0.4em;
 }
 
 /*
@@ -290,12 +290,17 @@ img {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     column-gap: calc(4 * var(--base-horizontal-spacing));
-    row-gap: var(--base-vertical-spacing);
+    row-gap: calc(2 * var(--base-vertical-spacing));
+    padding-top: var(--base-vertical-spacing);
+    padding-bottom: var(--base-vertical-spacing);
 }
 
-.main-content, .side-content, .animal-card {
+.main-content, .side-content, .animal-content-inner-container {
     padding-left: calc(2* var(--base-horizontal-spacing));
     padding-right: calc(2* var(--base-horizontal-spacing));
+}
+
+.main-content, .side-content {
     padding-top: calc(0.5 * var(--base-vertical-spacing));
     padding-bottom: calc(0.5 * var(--base-vertical-spacing));
 }
@@ -326,10 +331,13 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-left: calc(4* var(--base-horizontal-spacing));
+    padding-right: calc(4* var(--base-horizontal-spacing));
+    padding-top: var(--base-vertical-spacing);
+    padding-bottom: var(--base-vertical-spacing);
 }
 
 .animal-card h2 {
-    margin-top: 0;
     font-size: 1.277em;
     font-weight: lighter;
 }
@@ -343,8 +351,9 @@ img {
 #hero-animal {
     display: flex;
     flex-direction: column;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                      url("../img/hero-lion.jpg");
+    background-image: linear-gradient(to bottom,
+                                      rgba(0,0,0,0.13), rgba(0,0,0,0.87)),
+                      url("../img/hero-eagle.jpg");
     height: 100vh;
     background-size: cover;
     background-position: center;
@@ -440,7 +449,7 @@ img {
     #hero-animal {
         background-image: linear-gradient(to right, rgba(0,0,0,0.75),
                                           rgba(0,0,0,0.25)),
-                          url("../img/hero-eagle.jpg");
+                          url("../img/hero-eagle-desktop.jpg");
         height: 50vh;
     }
 }
