@@ -46,9 +46,8 @@
         </p>
         <h2>Automated tests</h2>
         <p>
-          The first test was run on November 8th 2023 against
-          <a href="https://github.com/trtho1068/DATA1200-exam/tree/3d7dfdce93048a225217ddd9cb7c3eeb37ceb6c8"
-             target="_blank"> this commit</a>.
+          The first test was run early on the first complete-ish page,
+          and gave the following results.
         </p>
         <figure>
           <img src="img/accessibility01.png"
@@ -67,17 +66,18 @@
           actual accessibility section of the test results.
         </p>
         <h3>Accessibility</h3>
-        <figure>
-          <img src="img/accessibility01-labels.png"
-               alt="screenshot of form element issue"
-               class="lighthouse-screenshot"
-               width="778"
-               height="60">
-        </figure>
         <p>
-          This issue relates to our hamburger menu, where we use a checkbox
-          <code>&ltinput&gt</code> element and an associated
-          <code>&ltlabel&gt</code>. Lighthouse complains that the checkbox
+          There is an issue related to our hamburger menu, where we use a
+          checkbox <code>&ltinput&gt</code> element and an associated
+          <code>&ltlabel&gt</code>.
+        </p>
+        <img src="img/accessibility01-labels.png"
+             alt="screenshot of form element issue"
+             class="lighthouse-screenshot"
+             width="778"
+             height="60">
+        <p>
+          Lighthouse complains that the checkbox
           does not have an associated label. Because we do actually state
           what element the label is for, I suspect that this happens because
           our label does not contain any text, but instead contains three
@@ -94,17 +94,15 @@
           to our hidden hamburger menu checkbox, thinking that was all well and
           good.
         </p>
-        <figure>
-          <img src="img/accessibility01-aria.png"
-               alt="screenshot of aria role issue"
-               class="lighthouse-screenshot"
-               width="778"
-               height="60">
-        </figure>
+        <img src="img/accessibility01-aria.png"
+             alt="screenshot of aria role issue"
+             class="lighthouse-screenshot"
+             width="778"
+             height="60">
         <p>
           After reading a little bit
           <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#toggle_buttons"
-             title="Read about aria role button on MDN Web Docs">
+            title="Read about aria role button on MDN Web Docs">
             about the topic
           </a> I conclude that the idea wasn't all bad as we do in fact use
           the checkbox as a toggle button. However, if my understanding was
@@ -118,45 +116,40 @@
           the above issues is to add an
           <code>aria-label</code> to the checkbox as is done in
           <a href="https://unused-css.com/blog/css-only-hamburger-menu/"
-             target="_blank"
-             title="Go unused-css.com burger menu example">
-            this example</a>. Straight forward solution with no JS required,
-          this is what we go for.
+          target="_blank"
+          title="Go unused-css.com burger menu example">
+          this example</a>. Straight forward solution with no JS required,
+          this is what we go for, and later tests seem to appreciate the
+          choice.
         </p>
         <h3>SEO</h3>
-        <figure>
-          <img src="img/accessibility01-mobile-friendly.png"
-               alt="screenshot of tap target issue"
-               class="lighthouse-screenshot"
-               width="797"
-               height="63">
-        </figure>
         <p>
           Lighthouse wants us to be more mobile friendly, more specifically
-          by appropriately sizing/spacing our tap targets. The unapproved
-          targets are the email address links in our footer. This is issue is
-          entirely avoidable, so we make sure to do better before next test.
+          by appropriately sizing/spacing our tap targets.
+        </p>
+        <img src="img/accessibility01-mobile-friendly.png"
+             alt="screenshot of tap target issue"
+             class="lighthouse-screenshot"
+             width="797"
+             height="63">
+        <p>
+          The unapproved targets are the email address links in our footer.
+          This issue should be entirely avoidable, but it still lingers.
         </p>
         <p>
-          There is one more complaint in the SEO section about a document
-          without a meta description, this is because the file topical.html
-          was empty at this stage.
+          There is one more complaint in the SEO section about documents
+          missing a meta description, this has not been prioritized.
         </p>
         <h3>Performance</h3>
         <p>
           A few other issues are grouped under performance and relates
           primarily to images, which at this stage there was only one of.
         </p>
-        <figure>
-          <img src="img/accessibility01-perf-diagnostics.png"
-               alt="screenshot of Lighthouse performance diagnostics overview"
-               class="lighthouse-screenshot"
-               width="797"
-               height="299">
-          <figcaption>
-            Performance diagnostics from the first automated test.
-          </figcaption>
-        </figure>
+        <img src="img/accessibility01-perf-diagnostics.png"
+             alt="screenshot of Lighthouse performance diagnostics overview"
+             class="lighthouse-screenshot"
+             width="797"
+             height="299">
         <p>
           Setting an explicit width and height is fairly straightforward,
           when using the <code>&ltimg&gt</code> tag Intellij will even suggest
@@ -168,15 +161,17 @@
           To improve on what was, we replace the image on the home page,
           with two cropped versions. One for mobile and one for desktop, and
           make sure the sizes are at least closer to the size
-          we actually need.
+          we actually need. And then we try to do better when adding new
+          images.
         </p>
         <p>
-          To serve images in next-gen formats we convert them to webp. We provide
-          jpg fallbacks for browsers not supporting webp.
+          To serve images in next-gen formats we convert them to webp.
+          In most cases we provide jpg fallbacks for browsers not supporting
+          webp.
         </p>
         <p>
-          Caching resources is not part of DATA1200, so this suggestion we
-          ignore.
+          Along the way we also encountered issues with too small fonts, and
+          some low contrast, all of which should be improved.
         </p>
         <h2>Other considerations</h2>
         <p>
@@ -210,12 +205,17 @@
           We have tried to make a simple and intuitive UI that should be easy to
           understand and navigate.
         </p>
+        <h3>Things we would like to have done</h3>
+        <p>
+          There are a few things we never got around to. Like changing the
+          default outline when navigating with keyboard, but our time is up.
+        </p>
       </main>
       <aside class="side-content">
         <p>
           If you're interested, you can read about how to make the most
           <a href="https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/"
-             target="_blank">
+            target="_blank">
             inaccessible website possible</a> while still maintaining a perfect
           Lighthouse score.
         </p>
