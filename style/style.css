@@ -1,28 +1,27 @@
 :root {
     --dark-theme-color: rgba(189, 147,249,1);
     --dark-theme-bg: rgba(25,25,25,1);
-    --dark-theme-elevated01-bg: rgba(37,37,37,1);
-    --dark-theme-elevated02-bg: rgba(46,46,46,1);
-    --dark-theme-elevated03-bg: rgba(53,53,53,1);
+    --dark-theme-bg-elevated01: rgba(37,37,37,1);
+    --dark-theme-bg-elevated02: rgba(46,46,46,1);
+    --dark-theme-bg-elevated03: rgba(53,53,53,1);
     --dark-theme-text: rgba(255,255,255,0.87);
     --dark-theme-secondary-text: rgba(255,255,255,0.6);
 
     --light-theme-color: rgba(211,74,151,1);
     --light-theme-bg: rgba(255,255,255,1);
-    --light-theme-elevated-bg: rgba(255,255,255,1);
     --light-theme-text: rgba(34,36,48,1);
     --light-theme-secondary-text: rgba(34,36,48,0.87);
 
     --color: var(--dark-theme-color);
     --bg-color: var(--dark-theme-bg);
-    --elevated-bg-color: var(--dark-theme-elevated01-bg);
+    --elevated-bg-color: var(--dark-theme-bg-elevated01);
     --text-color: var(--dark-theme-text);
     --secondary-text-color: var(--dark-theme-secondary-text);
 
     --base-font-size: 0.875rem;
     --base-line-height: 1.6;
-    --secondary-font-size: 0.833em;
-    --secondary-line-height: 1.9277;
+    --secondary-font-size: 0.783em;
+    --secondary-line-height: 2.0434;
 
     --base-vertical-spacing: calc(var(--base-font-size) *
                                   var(--base-line-height));
@@ -34,6 +33,7 @@ This document is written mobile first, and dark theme first. All media queries
 are gathered at the end.
 */
 
+/*Set box-sizing to border box and remove default space around*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -63,7 +63,7 @@ body {
 header {
     grid-area: header;
     color: var(--dark-theme-text);
-    background-color: var(--dark-theme-elevated01-bg);
+    background-color: var(--dark-theme-bg-elevated01);
 }
 
 /*nav ul display flex for simple switching between vert & horz nav*/
@@ -81,7 +81,7 @@ nav li:first-child {
 /*...other nav links are not, make parent li invisible*/
 nav li:not(:first-child){
     display: none;
-    background-color: var(--dark-theme-elevated02-bg);
+    background-color: var(--dark-theme-bg-elevated02);
 }
 
 /*make entire rows clickable in dropdown*/
@@ -90,7 +90,7 @@ nav li:not(:first-child) a {
 }
 
 nav li:not(:first-child) a:hover {
-    background-color: var(--dark-theme-elevated03-bg);
+    background-color: var(--dark-theme-bg-elevated03);
 }
 
 nav a {
@@ -110,8 +110,11 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--dark-theme-secondary-text);
-    background-color: var(--dark-theme-elevated01-bg);
+    gap: calc(8 * var(--base-horizontal-spacing));
+    color: var(--secondary-text-color);
+    background-color: var(--elevated-bg-color);
+    padding-top: calc(0.5 * var(--base-vertical-spacing));
+    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
 }
 
 footer address {
@@ -125,22 +128,34 @@ footer, code {
     line-height: var(--secondary-line-height);
 }
 
+/*Try our best to maintain vertical rhythm through headings*/
 h1, h2, h3 {
     line-height: 1.25;
     font-weight: normal;
-    margin-bottom: calc(0.33 * var(--base-vertical-spacing));
 }
 
 h1 {
     font-size: 2.082em;
+    margin-top:
+        calc(0.677 * (4 - (2.082 * 1.25 / 1.6)) * var(--base-vertical-spacing));
+    margin-bottom:
+        calc(0.333 * (4 - (2.082 * 1.25 / 1.6)) * var(--base-vertical-spacing));
 }
 
 h2 {
     font-size: 1.842em;
+    margin-top:
+        calc(0.677 * (4 - (1.842 * 1.25 / 1.6)) * var(--base-vertical-spacing));
+    margin-bottom:
+        calc(0.333 * (4 - (1.842 * 1.25 / 1.6)) * var(--base-vertical-spacing));
 }
 
 h3 {
     font-size: 1.63em;
+    margin-top:
+        calc(0.3333 * (2 - (1.63 * 1.25 / 1.6)) * var(--base-vertical-spacing));
+    margin-bottom:
+        calc(0.6777 * (2 - (1.63 * 1.25 / 1.6)) * var(--base-vertical-spacing));
 }
 
 p, figure {
@@ -259,7 +274,6 @@ img {
 }
 
 .content-container, .animal-content-outer-container {
-    padding-top: var(--base-vertical-spacing);
     padding-bottom: var(--base-vertical-spacing);
     padding-left: calc(2 * var(--base-horizontal-spacing));
     padding-right: calc(2 * var(--base-horizontal-spacing));
@@ -284,6 +298,7 @@ img {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas: "animal-cards";
+    padding-top: var(--base-vertical-spacing);
 }
 
 .animal-content-inner-container {
@@ -341,6 +356,10 @@ img {
 .animal-card h2 {
     font-size: 1.277em;
     font-weight: lighter;
+    margin-top:
+        calc(0.677 * (2 - (1.277 * 1.25 / 1.6)) * var(--base-vertical-spacing));
+    margin-bottom:
+        calc(0.333 * (2 - (1.277 * 1.25 / 1.6)) * var(--base-vertical-spacing));
 }
 
 .stick-to-top {
@@ -381,23 +400,29 @@ img {
 
     h1, h2, h3 {
         font-weight: bolder;
-        margin-bottom: calc(0.5 * var(--base-vertical-spacing));
-    }
-
-    h2, h3 {
-        margin-top: calc(1.5 * var(--base-vertical-spacing));
     }
 
     h1 {
         font-size: 2.565em;
+        margin-top:
+            calc(0.677 * (4 - (2.565 * 1.25 / 1.6)) * var(--base-vertical-spacing));
+        margin-bottom:
+            calc(0.333 * (4 - (2.565 * 1.25 / 1.6)) * var(--base-vertical-spacing));
     }
 
     h2 {
         font-size: 2.192em;
+        margin-top:
+            calc(0.677 * (4 - (2.192 * 1.25 / 1.6)) * var(--base-vertical-spacing));
+        margin-bottom:
+            calc(0.333 * (4 - (2.192 * 1.25 / 1.6)) * var(--base-vertical-spacing));
     }
 
     h3 {
+        margin-top: 0;
         font-size: 1.874em;
+        margin-bottom:
+            calc(1 * (2 - (1.874 * 1.25 / 1.6)) * var(--base-vertical-spacing));
     }
 
     /*horizontal navigation*/
@@ -415,7 +440,7 @@ img {
 
     /*active page visual cue*/
     nav li:not(:first-child) a.active {
-        background-color: var(--dark-theme-elevated02-bg);
+        background-color: var(--dark-theme-bg-elevated02);
     }
 
     img.lighthouse-screenshot {
@@ -468,11 +493,11 @@ img {
 
     .side-content {
         width: 13em;
-        max-height: 50vh;
+        max-height: 67vh;
         overflow-y: hidden;
         align-self: start;
         position: sticky;
-        top: calc(5.5 * var(--base-vertical-spacing));
+        top: calc(7 * var(--base-vertical-spacing));
     }
 }
 
@@ -486,13 +511,11 @@ then light theme you shall get...
         --bg-color: var(--light-theme-bg);
         --text-color: var(--light-theme-text);
         --secondary-text-color: var(--light-theme-secondary-text);
-        --elevated-bg-color: var(--light-theme-elevated-bg);
+        --elevated-bg-color: var(--light-theme-bg);
     }
 
     footer {
-       color: var(--light-theme-secondary-text);
-       background-color: var(--light-theme-bg);
-       border-top: 1px solid rgba(34,36,48,0.38);
+        border-top: 1px solid rgba(0,0,0,0.27);
     }
 
     img {
