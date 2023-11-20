@@ -20,8 +20,8 @@
 
     --base-font-size: 0.875rem;
     --base-line-height: 1.6;
-    --secondary-font-size: 0.783em;
-    --secondary-line-height: 2.0434;
+    --secondary-font-size: 0.885em;
+    --secondary-line-height: 1.807909605;
 
     --base-vertical-spacing: calc(var(--base-font-size) *
                                   var(--base-line-height));
@@ -134,6 +134,7 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
+/*https://www.modularscale.com ratio: 1.13*/
 h1 {
     font-size: 2.082em;
     margin-top:
@@ -341,6 +342,7 @@ img {
 
 .side-content {
     grid-area: sidebar;
+    color: var(--secondary-text-color);
 }
 
 .animal-card {
@@ -395,13 +397,16 @@ img {
 /*And then we move to larger screens...*/
 @media (min-width: 600px) {
     :root {
-        --base-font-size: 1.25rem;
+        --base-font-size: 1.15rem;
+        --secondary-font-size: 0.855em;
+        --secondary-line-height: 1.871345029;
     }
 
     h1, h2, h3 {
         font-weight: bolder;
     }
 
+    /*https://www.modularscale.com ratio: 1.17*/
     h1 {
         font-size: 2.565em;
         margin-top:
@@ -483,7 +488,7 @@ img {
 }
 
 /*Sidebar kept on the side as long as it looks alright*/
-@media (min-width: 75em) {
+@media (min-width: 67em) {
     .content-container {
         grid-template-columns: 1fr auto auto 1fr;
         grid-template-rows: 1fr;
