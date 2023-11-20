@@ -1,5 +1,5 @@
 :root {
-    --dark-theme-color: rgba(189, 147,249,1);
+    --dark-theme-color: rgba(189,147,249,1);
     --dark-theme-bg: rgba(25,25,25,1);
     --dark-theme-bg-elevated01: rgba(37,37,37,1);
     --dark-theme-bg-elevated02: rgba(46,46,46,1);
@@ -7,7 +7,7 @@
     --dark-theme-text: rgba(255,255,255,0.87);
     --dark-theme-secondary-text: rgba(255,255,255,0.6);
 
-    --light-theme-color:rgb(230, 50, 194);
+    --light-theme-color:rgb(230,50,194,1);
     --light-theme-bg: rgba(255,255,255,1);
     --light-theme-text: rgba(34,36,48,1);
     --light-theme-secondary-text: rgba(34,36,48,0.87);
@@ -66,7 +66,6 @@ header {
     background-color: var(--dark-theme-bg-elevated01);
 }
 
-/*nav ul display flex for simple switching between vert & horz nav*/
 nav ul {
     display: flex;
     flex-direction: column;

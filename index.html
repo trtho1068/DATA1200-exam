@@ -8,6 +8,7 @@
   </head>
   <body>
     <header class="stick-to-top">
+      <!-- Introductory content-->
       <nav>
         <input id="menu-toggle" type="checkbox" aria-label="Toggle Navigation">
         <ul>
@@ -36,11 +37,17 @@
     </header>
     <div class="content-container">
       <main class="main-content">
+        <!-- Main content-->
         <h1>Campus Pilestredet</h1>
         <p>
           Welcome! Here we present our campus at OsloMet Pilestredet.
           You can read about a few of our favorite locations, and we have an
           entire page dedicated to random animals.
+        </p>
+        <p>
+          On the accessibility page you can read about how we used
+          automated tests while creating this site, to try our best to make
+          it accessible for everyone.
         </p>
         <picture>
           <!--
@@ -68,36 +75,33 @@
                height="625">
         </picture>
         <p>
-          OsloMet Pilestredet is located in Oslo, the capital city of Norway. 
-          The university has multiple campuses throughout the city.
-          This leads to easy access to both public transport and cafes.
-          Around the campus you will find nice parks and lots of places to sit.
-          
+          OsloMet Pilestredet is located in Oslo, the capital of Norway, with
+          easy access to both public transport and cafes. Around campus you will
+          also find nice parks and lots of places to sit.
         </p>
         <picture>
           <!--
           Photographer unknown
           copied from https://www.oslofjordpictures.com/oslo/utgrdskilen-panorama-hccs5-l69aw 
           -->
-          <img src="img/oslo-panorama.webp" 
-          alt="Photo of Oslo"
-          width="938"
-          height="626">
+          <source type="image/webp"
+                  srcset="img/oslo.webp"
+                  width="825"
+                  height="388">
+          <img src="img/oslo.jpg"
+               alt="Panorama of Oslo."
+               width="800"
+               height="376">
         </picture>
-        <p>
-          On the
-          accessibility page you can read about how we used
-          automated tests while creating this site, to try our best to make
-          it accessible for everyone.
-        </p>
       </main>
     <aside class="side-content">
+      <!-- Related content-->
       <p>
         Did you know? In 2017 Høgskolen i Oslo og Akershus applied to become a
         university, and in january 2018 the approval was accepted, and OsloMet
         was born.
         <a href="https://lokalhistoriewiki.no/wiki/Oslomet_%E2%80%93_storbyuniversitetet"
-           target="_blank" title="Go to lokalhistoriewiki.no to learn more">
+           title="Go to lokalhistoriewiki.no to learn more">
           Source and further reading</a>.
       </p>
     </aside>
@@ -105,7 +109,7 @@
     <footer>
       <!--
       The address tag defines contact info for it's nearest body or article
-      ancestor
+      ancestor, body in this case...
       -->
       <address>
           <a href="mailto:stmir5951@oslomet.no">stmir5951@oslomet.no</a>
@@ -114,7 +118,7 @@
           <a href="mailto:trtho1068@oslomet.no">trtho1068@oslomet.no</a>
       </address>
       <a href="https://github.com/trtho1068/DATA1200-exam"
-         target="_blank" title="Go to project's Github repo">GitHub repo</a>
+         title="Go to project's Github repo">GitHub repo</a>
     </footer>
   </body>
 </html>
