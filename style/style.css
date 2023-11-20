@@ -1,7 +1,9 @@
 :root {
     --dark-theme-color: rgba(189, 147,249,1);
     --dark-theme-bg: rgba(25,25,25,1);
-    --dark-theme-elevated-bg: rgba(37,37,37,1);
+    --dark-theme-elevated01-bg: rgba(37,37,37,1);
+    --dark-theme-elevated02-bg: rgba(46,46,46,1);
+    --dark-theme-elevated03-bg: rgba(53,53,53,1);
     --dark-theme-text: rgba(255,255,255,0.87);
     --dark-theme-secondary-text: rgba(255,255,255,0.6);
 
@@ -13,7 +15,7 @@
 
     --color: var(--dark-theme-color);
     --bg-color: var(--dark-theme-bg);
-    --elevated-bg-color: var(--dark-theme-elevated-bg);
+    --elevated-bg-color: var(--dark-theme-elevated01-bg);
     --text-color: var(--dark-theme-text);
     --secondary-text-color: var(--dark-theme-secondary-text);
 
@@ -61,13 +63,13 @@ body {
 header {
     grid-area: header;
     color: var(--dark-theme-text);
-    background-color: var(--dark-theme-elevated-bg);
+    background-color: var(--dark-theme-elevated01-bg);
 }
 
 /*nav ul display flex for simple switching between vert & horz nav*/
 nav ul {
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
     list-style-type: none;
 }
 
@@ -79,7 +81,7 @@ nav li:first-child {
 /*...other nav links are not, make parent li invisible*/
 nav li:not(:first-child){
     display: none;
-    background-color: var(--dark-theme-elevated-bg);
+    background-color: var(--dark-theme-elevated02-bg);
 }
 
 /*make entire rows clickable in dropdown*/
@@ -87,9 +89,8 @@ nav li:not(:first-child) a {
     flex-grow: 1;
 }
 
-/*TODO: need another level of elevation for dropdown links*/
 nav li:not(:first-child) a:hover {
-    background-color: var(--dark-theme-elevated-bg);
+    background-color: var(--dark-theme-elevated03-bg);
 }
 
 nav a {
@@ -110,7 +111,7 @@ footer {
     justify-content: center;
     align-items: center;
     color: var(--dark-theme-secondary-text);
-    background-color: var(--dark-theme-elevated-bg);
+    background-color: var(--dark-theme-elevated01-bg);
 }
 
 footer address {
@@ -402,6 +403,8 @@ img {
     /*horizontal navigation*/
     nav ul {
         flex-direction: row;
+        padding-left: calc(2 * var(--base-horizontal-spacing));
+        padding-right: calc(2 * var(--base-horizontal-spacing));
     }
 
     /*visible links, must now inherit bg color to avoid looking stupid*/
@@ -412,7 +415,7 @@ img {
 
     /*active page visual cue*/
     nav li:not(:first-child) a.active {
-        background-color: var(--dark-theme-elevated-bg);
+        background-color: var(--dark-theme-elevated02-bg);
     }
 
     img.lighthouse-screenshot {
