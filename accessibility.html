@@ -39,7 +39,7 @@
         <h1>Testing our site</h1>
         <p>
           Here we go through how we used automated and manual testing to try and
-          improve our site, primarily by making it more accessible. We've used
+          improve our site. We've used
           <a href="https://developer.chrome.com/docs/lighthouse/overview/"
              title="Go to Google Lighthouse documentation">
             Google Lighthouse</a> for the automated tests.
@@ -100,12 +100,12 @@
              width="778"
              height="60">
         <p>
-          After reading a little bit
+          After
           <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role#toggle_buttons"
-            title="Read about aria role button on MDN Web Docs">
-            about the topic
-          </a> I conclude that the idea wasn't all bad as we do in fact use
-          the checkbox as a toggle button. However, if my understanding was
+            title="Read about aria role button on MDN Web Docs"
+          >reading about Toggle Buttons on MDN WebDocs</a> I conclude that the
+          idea wasn't all bad as we do in fact use the checkbox as a
+          toggle button. However, if my understanding was
           correct we should also use the <code>aria-pressed</code> attribute
           to turn the element into a toggle button. Depending on the state of
           the checkbox we would then need to update <code>aria-pressed</code>
@@ -113,14 +113,12 @@
         </p>
         <p>
           Another option which I think might be a slight improvement on both of
-          the above issues is to add an
-          <code>aria-label</code> to the checkbox as is done in
+          the above issues is to
           <a href="https://unused-css.com/blog/css-only-hamburger-menu/"
-          target="_blank"
-          title="Go unused-css.com burger menu example">
-          this example</a>. Straight forward solution with no JS required,
-          this is what we go for, and later tests seem to appreciate the
-          choice.
+          title="Go to unused-css.com burger menu example"
+          >add an <code>aria-label</code> to the checkbox</a>. Straight forward
+          solution with no JS required, this is what we go for, and later tests
+          seem to appreciate the choice.
         </p>
         <h3>SEO</h3>
         <p>
@@ -171,7 +169,16 @@
         </p>
         <p>
           Along the way we also encountered issues with too small fonts, and
-          some low contrast, all of which should be improved.
+          some low contrast, all of which have been improved.
+        </p>
+        <p>
+          We still get complaints about the images on the animals page, but
+          these are sized at width 800px, which is not too far away from the
+          max-width at which we show them.
+        </p>
+        <p>
+          Hero images should have been compressed, but we never got there,
+          they are at least smaller than one megabyte.
         </p>
         <h2>Other considerations</h2>
         <p>
@@ -202,22 +209,31 @@
           all nav links.
         </p>
         <p>
+          The header with site navigation is made sticky on most pages to
+          provide easy access. On topical (animals) we prioritized appearance.
+        </p>
+        <p>
+          We have tried to give links meaningful text rather than targeting
+          attributes like <code>title</code> and <code>aria-label</code>.
+        </p>
+        <p>
+          Text is limited at a width of <code>40em</code> to ensure it is
+          easy to read, and we put in an effort to maintain vertical rhythm
+          through headings, and for different font-sizes. We would have liked
+          to transition smoothly between max and min font-size, but didn't
+          have the time.
+        </p>
+        <p>
           We have tried to make a simple and intuitive UI that should be easy to
           understand and navigate.
-        </p>
-        <h3>Things we would like to have done</h3>
-        <p>
-          There are a few things we never got around to. Like changing the
-          default outline when navigating with keyboard, but our time is up.
         </p>
       </main>
       <aside class="side-content">
         <p>
           If you're interested, you can read about how to make the most
+          inaccessible website possible while
           <a href="https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/"
-            target="_blank">
-            inaccessible website possible</a> while still maintaining a perfect
-          Lighthouse score.
+            >maintaining a perfect Lighthouse score.</a>
         </p>
       </aside>
     </div>
