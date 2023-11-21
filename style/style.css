@@ -482,7 +482,7 @@ img {
     }
 
     /*Read without getting neck problems*/
-    .main-content {
+    .main-content, .side-content {
         max-width: 40em;
     }
 
