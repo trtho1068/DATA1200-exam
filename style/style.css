@@ -1,5 +1,4 @@
 :root {
-    --dark-theme-color: rgba(189,147,249,1);
     --dark-theme-bg: rgba(25,25,25,1);
     --dark-theme-bg-elevated01: rgba(37,37,37,1);
     --dark-theme-bg-elevated02: rgba(46,46,46,1);
@@ -7,12 +6,10 @@
     --dark-theme-text: rgba(255,255,255,0.87);
     --dark-theme-secondary-text: rgba(255,255,255,0.6);
 
-    --light-theme-color:rgb(230,50,194,1);
     --light-theme-bg: rgba(255,255,255,1);
     --light-theme-text: rgba(34,36,48,1);
     --light-theme-secondary-text: rgba(34,36,48,0.87);
 
-    --color: var(--dark-theme-color);
     --bg-color: var(--dark-theme-bg);
     --elevated-bg-color: var(--dark-theme-bg-elevated01);
     --text-color: var(--dark-theme-text);
@@ -30,7 +27,8 @@
 
 /*
 This document is written mobile first, and dark theme first. All media queries
-are gathered at the end.
+are gathered at the end. We try to stick to increasing specificity, any
+exceptions follow the html doc flow.
 */
 
 /*Set box-sizing to border box and remove default space around*/
@@ -178,8 +176,22 @@ p a {
     color: var(--text-color);
 }
 
+p a:visited {
+    color: rgb(153,153,153);
+}
+
+p a:focus {
+    padding: 0.1em;
+    outline: 1px solid rgb(153,80,253);
+}
+
 p a:hover {
-    color: var(--color);
+    background-color: var(--dark-theme-bg-elevated03);
+}
+
+p a:active {
+   padding: 0.1em;
+   outline: 1px solid orange;
 }
 
 figcaption {
@@ -356,7 +368,6 @@ img {
 
 .animal-card h2 {
     font-size: 1.277em;
-    font-weight: lighter;
     margin-top:
         calc(0.677 * (2 - (1.277 * 1.25 / 1.6)) * var(--base-vertical-spacing));
     margin-bottom:
@@ -470,8 +481,13 @@ img {
             ". animal-cards .";
     }
 
-    .main-content, .side-content {
+    /*Read without getting neck problems*/
+    .main-content {
         max-width: 40em;
+    }
+
+    .animal-card h2 {
+        font-weight: normal;
     }
 
     /*rm burger fm keyboard nav*/
@@ -522,6 +538,14 @@ then light theme you shall get...
 
     footer {
         border-top: 1px solid rgba(0,0,0,0.27);
+    }
+
+    p a:visited {
+        color: rgb(153,80,253);
+    }
+
+    p a:hover {
+        background-color: rgb(200,200,200);
     }
 
     img {
