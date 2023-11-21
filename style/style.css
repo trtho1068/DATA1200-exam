@@ -64,6 +64,23 @@ header {
     background-color: var(--dark-theme-bg-elevated01);
 }
 
+nav a, footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(8 * var(--base-horizontal-spacing));
+    color: var(--secondary-text-color);
+    background-color: var(--elevated-bg-color);
+    padding-top: calc(0.5 * var(--base-vertical-spacing));
+    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
+}
+
 nav ul {
     display: flex;
     flex-direction: column;
@@ -86,10 +103,6 @@ nav li:not(:first-child) a {
     flex-grow: 1;
 }
 
-nav li:not(:first-child) a:hover {
-    background-color: var(--dark-theme-bg-elevated03);
-}
-
 nav a {
     padding-top: calc(0.5 * var(--base-vertical-spacing));
     padding-bottom: calc(0.5 * var(--base-vertical-spacing));
@@ -97,21 +110,12 @@ nav a {
     padding-right: calc(2 * var(--base-horizontal-spacing));
 }
 
-nav a, footer a {
-    color: inherit;
-    text-decoration: none;
+nav a:focus {
+    background-color: var(--dark-theme-bg-elevated03);
 }
 
-footer {
-    grid-area: footer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc(8 * var(--base-horizontal-spacing));
-    color: var(--secondary-text-color);
-    background-color: var(--elevated-bg-color);
-    padding-top: calc(0.5 * var(--base-vertical-spacing));
-    padding-bottom: calc(0.5 * var(--base-vertical-spacing));
+nav li:not(:first-child) a:hover {
+    background-color: var(--dark-theme-bg-elevated03);
 }
 
 footer address {
@@ -541,11 +545,11 @@ then light theme you shall get...
     }
 
     p a:visited {
-        color: rgb(153,80,253);
+        color: rgb(112,112,112);
     }
 
     p a:hover {
-        background-color: rgb(200,200,200);
+        background-color: rgb(222,222,222);
     }
 
     img {
