@@ -390,7 +390,6 @@ img {
     background-image:
         linear-gradient(to bottom,
                         rgba(0,0,0,0.13), rgba(0,0,0,0.87)),
-                        url("../img/hero-eagle.webp"),
                         url("../img/hero-eagle.jpg");
     height: calc(100vh - 2 * var(--base-vertical-spacing));
     background-size: cover;
@@ -504,7 +503,6 @@ img {
         background-image:
             linear-gradient(to right, rgba(0,0,0,0.75),
                             rgba(0,0,0,0.25)),
-                            url("../img/hero-eagle-desktop.webp"),
                             url("../img/hero-eagle-desktop.jpg");
         height: 50vh;
     }
